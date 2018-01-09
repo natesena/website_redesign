@@ -1,16 +1,27 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import WebDevelopment from './WebDevelopment.js'
+
+
+const NavBarStyle = {
+    backgroundColor: 'black',
+    color: 'white',
+}
+
+const LinkStyle = {
+    margin: '10px',
+    padding: '10px'
+}
 
 class Navbar extends React.Component{
     render(){
         return (
-            <div className='NavBar'>
-                <Link to='/'>Home</Link>
-                <Link to='/WebDevelopment'>WebDevelopment</Link>
-                <Link to='/ProductDesign'>Product Design</Link>
-                <Link to='/Blog'>Blog</Link>
-                <Link to='/Ideas'>Ideas</Link>
+            <div className='NavBar' style={NavBarStyle}>
+                <Link to='/' style={LinkStyle}>Home</Link>
+                <Link to='/WebDevelopment' style={LinkStyle}>Web Development</Link>
+                <Link to='/ProductDesign' style={LinkStyle}>Product Design</Link>
+                <Link to='/Blog' style={LinkStyle}>Blog</Link>
+                <Link to='/Ideas' style={LinkStyle}>Ideas</Link>
+                <Link to='/UploadProject' style={LinkStyle}>Upload</Link>
             </div>
         )
     }

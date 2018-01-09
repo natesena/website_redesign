@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import { Switch, Route, Redirect } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import './App.css';
 import Navbar from './Components/Navbar.js'
 import Home from './Components/Home.js'
 import WebDevelopment from './Components/WebDevelopment.js'
 import ProductDesign from './Components/ProductDesign.js'
+import Upload from './Components/Upload.js'
 
 
 
@@ -14,7 +14,7 @@ class App extends Component {
     return (
       
       <div className="App">
-        <Navbar></Navbar>
+        <Navbar/>
         <Switch>
           <Route exact path="/" render={(props)=>{
             return <Home/>
@@ -24,6 +24,9 @@ class App extends Component {
           }} />
           <Route path="/ProductDesign" render={(props)=>{
             return <ProductDesign/>
+          }} />
+          <Route path="/UploadProject" render={(props)=>{
+            return <Upload/>
           }} />
         </Switch>
       </div>
