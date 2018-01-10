@@ -3,7 +3,7 @@ const
     express = require('express')
     BlogPostRouter = new express.Router()
 
-BlogPostRouter.route('/Blog')
+BlogPostRouter.route('/')
     .get(BlogPostCTRL.index)
     .post(BlogPostCTRL.create)
 
