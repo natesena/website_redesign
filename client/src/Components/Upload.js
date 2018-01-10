@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 
 class Upload extends React.Component{
     state = {
@@ -13,6 +14,13 @@ class Upload extends React.Component{
     submit(evt){
         evt.preventDefault()
         console.log('tried to submit ' + this.state.title + ', ' + this.state.ProjectDescription)
+        axios.post('/api/Blog', {
+            title: this.state.title,
+            description: this.state.ProjectDescription
+        })
+        .then((res)=>{
+            console.log('res', res)
+        })
     }
     render(){
         return(

@@ -6,6 +6,7 @@ import Home from './Components/Home.js'
 import WebDevelopment from './Components/WebDevelopment.js'
 import ProductDesign from './Components/ProductDesign.js'
 import Upload from './Components/Upload.js'
+import Blog from './Components/Blog.js'
 
 
 
@@ -27,6 +28,9 @@ class App extends Component {
           }} />
           <Route path="/UploadProject" render={(props)=>{
             return <Upload/>
+          }} />
+           <Route path="/Blog" render={(props)=>{
+            return <Blog/>
           }} />
         </Switch>
       </div>

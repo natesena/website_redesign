@@ -5,11 +5,13 @@ import {Link} from 'react-router-dom'
 const NavBarStyle = {
     backgroundColor: 'black',
     color: 'white',
+    padding: '20px'
 }
 
 const LinkStyle = {
     margin: '10px',
-    padding: '10px'
+    textDecoration: 'none',
+    color: 'white'
 }
 
 class Navbar extends React.Component{
