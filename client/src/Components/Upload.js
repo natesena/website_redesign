@@ -5,11 +5,17 @@ import EditorComponent from './Editor.js'
 class Upload extends React.Component{
     state = {
         title: '',
-        ProjectDescription: ''
+        ProjectDescription: '',
+        type: 'WebDevelopment'
     }
     onChange(evt){
         this.setState({
             [evt.target.name]: evt.target.value
+        })
+    }
+    onSelectChange(evt){
+        this.setState({
+            type: evt.target.value
         })
     }
     submit(evt){
@@ -24,6 +30,10 @@ class Upload extends React.Component{
         })
     }
     render(){
+        let editor = null
+        if(this.state.type !== 'Ideas'){
+            editor = <EditorComponent/>
+        }
         return(
             <div>
                 <h1>Upload Here</h1>
@@ -36,8 +46,15 @@ class Upload extends React.Component{
                         <label>Project Description</label>
                         <textarea name='ProjectDescription' value={this.state.value} onChange={this.onChange.bind(this)}></textarea>
                     </div>
+
+                    <select onChange={this.onSelectChange.bind(this)}>
+                        <option value="WebDevelopment">Web Development</option>
+                        <option value="ProductDesign">Product Design</option>
+                        <option value="Blog">Blog</option>
+                        <option value="Ideas">Ideas</option>
+                    </select>
                     <br/>
-                    <EditorComponent/>
+                    {editor}
                     <input type='submit' ></input>
                 </form>
             </div>
