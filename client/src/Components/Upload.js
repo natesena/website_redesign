@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import EditorComponent from './Editor.js'
 
 class Upload extends React.Component{
     state = {
@@ -36,6 +37,7 @@ class Upload extends React.Component{
                         <textarea name='ProjectDescription' value={this.state.value} onChange={this.onChange.bind(this)}></textarea>
                     </div>
                     <br/>
+                    <EditorComponent/>
                     <input type='submit' ></input>
                 </form>
             </div>

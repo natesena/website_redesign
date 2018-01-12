@@ -8,7 +8,9 @@ import ProductDesign from './Components/ProductDesign.js'
 import Upload from './Components/Upload.js'
 import Blog from './Components/Blog.js'
 
-
+const containerStyle = {
+  margin: '50px'
+}
 
 class App extends Component {
   render() {
@@ -16,23 +18,25 @@ class App extends Component {
       
       <div className="App">
         <Navbar/>
-        <Switch>
-          <Route exact path="/" render={(props)=>{
-            return <Home/>
-          }} />
-           <Route path="/WebDevelopment" render={(props)=>{
-            return <WebDevelopment/>
-          }} />
-          <Route path="/ProductDesign" render={(props)=>{
-            return <ProductDesign/>
-          }} />
-          <Route path="/UploadProject" render={(props)=>{
-            return <Upload/>
-          }} />
-           <Route path="/Blog" render={(props)=>{
-            return <Blog/>
-          }} />
-        </Switch>
+        <div style={containerStyle}>
+          <Switch>
+            <Route exact path="/" render={(props)=>{
+              return <Home/>
+            }} />
+            <Route path="/WebDevelopment" render={(props)=>{
+              return <WebDevelopment/>
+            }} />
+            <Route path="/ProductDesign" render={(props)=>{
+              return <ProductDesign/>
+            }} />
+            <Route path="/UploadProject" render={(props)=>{
+              return <Upload/>
+            }} />
+            <Route path="/Blog" render={(props)=>{
+              return <Blog/>
+            }} />
+          </Switch>
+        </div>
       </div>
     );
   }

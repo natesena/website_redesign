@@ -5,13 +5,13 @@ const
     bodyParser = require('body-parser')
     app = express()
     MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/base'
-    BlogPostRouter = require('./Routes/BlogPostRoutes.js')
+    PostRouter = require('./Routes/PostRoutes.js')
 
 mongoose.connect(MONGODB_URI, (err)=>{
     console.log(err||"connected to Mongo")
 })
 app.use(bodyParser.json())
-app.use('/api/Blog', BlogPostRouter)
+app.use('/api/Blog', PostRouter)
 
 app.get('/api', (req, res) => {
     res.json({message: "API root."})
