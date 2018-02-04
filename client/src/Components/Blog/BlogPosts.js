@@ -43,7 +43,7 @@ class BlogPost extends React.Component{
                 <p style={pStyle}>{this.props.description}</p>
                 {blogBody}
                 <div style={postControlStyle}>
-                    <a style={editStyle} href={`/Blog/${this.props.id}`}>edit</a>
+                    <a style={editStyle} href={`/Edit/${this.props.id}`}>edit</a>
                     <a style={editStyle} href="#trash">Trash</a>
                 </div>
             </div>

@@ -32,6 +32,9 @@ class App extends Component {
             <Route path="/UploadProject" render={(props)=>{
               return <Upload/>
             }} />
+            <Route path="/Edit" render={(props)=>{
+              return <Upload/>
+            }} />
             <Route path="/Blog" render={(props)=>{
               return <Blog/>
             }} />

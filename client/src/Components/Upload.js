@@ -44,10 +44,45 @@ class Upload extends React.Component{
     //must create an empty editor state if going to upload an rich text document with draft.js
     state = {
         errors: [],
+        bodyPlaceholder: '',
         title: '',
+        titlePlaceholder: 'Name',
         ProjectDescription: '',
+        descriptionPlaceholder: 'Project Description',
         type: 'WebDevelopment',
+        typePlaceholder: '',
         editorState: EditorState.createEmpty(),
+    }
+    // THis function will be used to determine if we are editing or not
+    componentDidMount(){
+        let url = window.location.href
+        var splits = url.split('/')
+        for(let i = 0; i < splits.length; i++){
+            if(splits[i] === "Edit"){
+                axios.get('/api/Blog/' + splits[i+1])
+                .then((res)=>{
+                    console.log("res: ", res)
+                    var theType = res.data.Post.type
+                    //get index of select whose value equals the type
+                    var theSelect = document.getElementById('select')
+                    console.log("options: ",theSelect.options)
+                    var selectIndex
+                    for(let k = 0; k < theSelect.options; k++){
+                        if(theSelect.options[k].value === theType){
+                            selectIndex = k
+                            console.log("found select index", selectIndex)
+                        }
+                    }
+                    this.setState({
+                        title: res.data.Post.title,
+                        titlePlaceholder: res.data.Post.title,
+                        ProjectDescription: res.data.Post.description,
+                        descriptionPlaceholder: res.data.Post.description,
+                    })
+                })
+            }
+        }
+        
     }
     onChange(evt){
         this.setState({
@@ -131,17 +166,18 @@ class Upload extends React.Component{
                 <div className="row">
                     <div className="column-half">
                         <div>
-                            <input style={InputStyle} type='text' name='title' placeholder="Name" onChange={this.onChange.bind(this)}/>
+                            <input style={InputStyle} type='text' name='title' placeholder={this.state.titlePlaceholder} onChange={this.onChange.bind(this)}/>
                         </div>
                         <div>
-                            <textarea style={TextAreaStyle} name='ProjectDescription' placeholder="Project Description" onChange={this.onChange.bind(this)}></textarea>
+                            <textarea style={TextAreaStyle} name='ProjectDescription' placeholder={this.state.descriptionPlaceholder} onChange={this.onChange.bind(this)}></textarea>
                         </div>
                     </div>
                     <div className="column-half">
                         <BlogPost title={this.state.title} description={this.state.ProjectDescription} body={{}} bodyVisible={false}/>
                     </div>
                 </div>
-                <select style={SelectStyle} onChange={this.onSelectChange.bind(this)}>
+                <select id="select" style={SelectStyle} onChange={this.onSelectChange.bind(this)}>
+                    <option value="" disabled defaultValue>Select Your Post Category</option>
                     <option value="WebDevelopment">Web Development</option>
                     <option value="ProductDesign">Product Design</option>
                     <option value="Blog">Blog</option>
