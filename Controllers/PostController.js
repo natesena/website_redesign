@@ -13,12 +13,14 @@ module.exports = {
         })
     },
     create: (req,res)=>{
-        Post.create(req.body, (err,Post)=>{
+        Post.create(req.body, (err,newpost)=>{
             console.log('Post Post Create Route Hit')
+            console.log("req.body: ", req.body)
             if(err){
+                console.log("err: ", err)
                 res.send({message: 'failure', err: err.code})
             }
-            res.send({ message: 'success', Post})
+            res.send({ message: 'success', newpost})
         })
     },
     show: (req,res)=>{

@@ -3,7 +3,7 @@ const
 
 PostSchema = new Mongoose.Schema({
     title: {type: String, required: true},
-    description: {type: String},
+    description: {type: String, required: true},
     date: {type: Date, default: Date.now},
     type: {type: String, required: true},
     body: {type: Object}
