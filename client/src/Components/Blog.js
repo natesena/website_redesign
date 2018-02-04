@@ -37,7 +37,7 @@ class Blog extends React.Component{
             })
         })
     }
-    componentDidMount(){
+    onLoad(){
         let id = this.getID()
         console.log(id)
         if(id){
@@ -47,6 +47,9 @@ class Blog extends React.Component{
             this.getAllBlogPosts()
         }
     }
+    componentDidMount(){
+        this.onLoad()
+    }
     render(){
         let visibility = false
         if(this.state.id){
@@ -55,6 +58,7 @@ class Blog extends React.Component{
         return(
             <div>
             <h1>Blog</h1>
+            <p>I want to do pagination on this page and should look up if there is a best practice</p>
                 {this.state.posts.map((post)=>{
                     return <BlogPost key={post._id} id={post._id} title={post.title} description={post.description} body={post.body} bodyVisible={visibility}/>
                 })}

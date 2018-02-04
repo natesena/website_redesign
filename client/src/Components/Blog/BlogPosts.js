@@ -6,11 +6,25 @@ const divStyle = {
     boxShadow: '0px 3px 3px rgba(10, 10, 10, .2)',
     padding: '10px'
 }
+
+const aStyle = {
+    textDecoration: "none",
+    margin: "10px"
+}
+const editStyle = {
+    margin: "2px",
+    textDecoration: "none"
+}
 const postControlStyle = {
     textAlign: 'right'
 }
 const blogBodyStyle = {
-    border: "1px solid blue"
+    boxShadow: '0px 3px 3px rgba(10, 10, 10, .2)',
+    padding: '10px',
+    margin: "10px 0"
+}
+const pStyle ={
+    margin: "10px"
 }
 
 class BlogPost extends React.Component{
@@ -23,14 +37,14 @@ class BlogPost extends React.Component{
             </div>
         }  
         return(
-            <div style={divStyle}>
+            <div className="post" style={divStyle}>
             {/* put an href here to the specific post */}
-                <a href={`/Blog/${this.props.id}`}><h2>{this.props.title}</h2></a>
-                <p>{this.props.description}</p>
+                <a style={aStyle} href={`/Blog/${this.props.id}`}><h2>{this.props.title}</h2></a>
+                <p style={pStyle}>{this.props.description}</p>
                 {blogBody}
                 <div style={postControlStyle}>
-                    <p>edit</p>
-                    <p>trash</p>
+                    <a style={editStyle} href={`/Blog/${this.props.id}`}>edit</a>
+                    <a style={editStyle} href="#trash">Trash</a>
                 </div>
             </div>
         )

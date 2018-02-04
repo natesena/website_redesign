@@ -3,10 +3,13 @@ import axios from 'axios'
 // need to feed in the raw data from the editor component into here
 import EditorComponent from './Editor.js'
 import { convertToRaw, EditorState } from 'draft-js';
+import BlogPost from "./Blog/BlogPosts.js"
 //potentially add photo uploads here as well
 
 const EditorStyle = {
-    border: "5px solid black"
+    marginTop: "10px",
+    border: "5px solid black",
+    
 }
 
 const errorStyle = {
@@ -17,18 +20,23 @@ const errorStyle = {
 const InputStyle = {
     border: "none",
     margin: "20px 0 20px 0",
+    border: "1px solid black",
 
 }
 const TextAreaStyle = {
     border: "none",
-    margin: "20px 0 10px 0"
+    margin: "5px 0",
+    width: "100%",
+    border: "1px solid black",
+    minHeight: "100px"
 }
 
 const SelectStyle = {
     margin: "10px 0 10px 0",
     backgroundColor: "gray",
     fontSize: "1.5em",
-    padding: "5px"
+    padding: "5px",
+    clear: "both"
 }
 
 
@@ -120,26 +128,29 @@ class Upload extends React.Component{
                     return <p key="{num}" style={errorStyle}>{error}</p>
                 })}
                 <h1>Upload Here</h1>
-                <form onSubmit={this.submit.bind(this)}>
-                    <div>
-                        <input style={InputStyle} type='text' name='title' placeholder="Name" value={this.state.value} onChange={this.onChange.bind(this)}/>
+                <div className="row">
+                    <div className="column-half">
+                        <div>
+                            <input style={InputStyle} type='text' name='title' placeholder="Name" onChange={this.onChange.bind(this)}/>
+                        </div>
+                        <div>
+                            <textarea style={TextAreaStyle} name='ProjectDescription' placeholder="Project Description" onChange={this.onChange.bind(this)}></textarea>
+                        </div>
                     </div>
-                    <div>
-                        <textarea style={TextAreaStyle} name='ProjectDescription' placeholder="Project Description" value={this.state.value} onChange={this.onChange.bind(this)}></textarea>
+                    <div className="column-half">
+                        <BlogPost title={this.state.title} description={this.state.ProjectDescription} body={{}} bodyVisible={false}/>
                     </div>
-
-                    <select style={SelectStyle} onChange={this.onSelectChange.bind(this)}>
-                        <option value="WebDevelopment">Web Development</option>
-                        <option value="ProductDesign">Product Design</option>
-                        <option value="Blog">Blog</option>
-                        <option value="Ideas">Ideas</option>
-                    </select>
-                    <br/>
-                    <div style={EditorStyle}>
+                </div>
+                <select style={SelectStyle} onChange={this.onSelectChange.bind(this)}>
+                    <option value="WebDevelopment">Web Development</option>
+                    <option value="ProductDesign">Product Design</option>
+                    <option value="Blog">Blog</option>
+                    <option value="Ideas">Ideas</option>
+                </select>
+                <div style={EditorStyle}>
                         {editor}
-                    </div>
-                    <input type='submit' ></input>
-                </form>
+                </div>
+                <button onClick={this.submit.bind(this)}>Submit</button>
             </div>
         )
     }
