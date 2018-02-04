@@ -4,7 +4,7 @@ const
 
 module.exports = {
     index: (req,res)=>{
-       Post.find({}, (err, Posts)=>{
+        Post.find(req.query , (err, Posts)=>{
             console.log('Blog Post Index Route Hit')
             if(err){
                 res.send({message: 'failure', err: err.code})
