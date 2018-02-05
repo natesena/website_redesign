@@ -60,7 +60,7 @@ class Blog extends React.Component{
             <h1>Blog</h1>
             <p>I want to do pagination on this page and should look up if there is a best practice</p>
                 {this.state.posts.map((post)=>{
-                    return <BlogPost key={post._id} id={post._id} title={post.title} description={post.description} body={post.body} bodyVisible={visibility}/>
+                    return <BlogPost key={post._id} id={post._id} title={post.title} description={post.description} body={JSON.parse(post.body)} bodyVisible={visibility}/>
                 })}
             </div>
         )

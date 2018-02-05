@@ -1,6 +1,7 @@
 import React from 'react'
 import draftToHtml from 'draftjs-to-html'
 import ReactHtmlParser from 'react-html-parser';
+import axios from 'axios'
 
 const divStyle = {
     boxShadow: '0px 3px 3px rgba(10, 10, 10, .2)',
@@ -28,7 +29,12 @@ const pStyle ={
 }
 
 class BlogPost extends React.Component{
-    
+    deletePost(){
+        axios.delete('/api/Blog/' + this.props.id)
+        .then((res)=>{
+            console.log("res: ", res)
+        })
+    }
     render(){
         let blogBody = null
         if(this.props.bodyVisible){
@@ -44,7 +50,7 @@ class BlogPost extends React.Component{
                 {blogBody}
                 <div style={postControlStyle}>
                     <a style={editStyle} href={`/Edit/${this.props.id}`}>edit</a>
-                    <a style={editStyle} href="#trash">Trash</a>
+                    <a style={editStyle} href="#trash" onClick={this.deletePost.bind(this)}>Trash</a>
                 </div>
             </div>
         )

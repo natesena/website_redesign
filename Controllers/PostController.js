@@ -30,5 +30,13 @@ module.exports = {
             }
             res.send({ message: 'success', Post})
         })
+    },
+    delete: (req,res)=>{
+        Post.findByIdAndRemove(req.params.id, (err,Post)=>{
+            if(err){
+                res.send({message: 'failure', err: err.code})
+            }
+            res.send({ message: 'success', Post})
+        })
     }
 }

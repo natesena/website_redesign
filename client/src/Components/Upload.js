@@ -1,8 +1,13 @@
+// The upload component is a space where I can upload new posts of any variety
+// If I visit the upload component with an id of a particular component following
+//  "upload" then I want to pull up that information as if I was editing that 
+//  post
+
+
 import React from 'react'
 import axios from 'axios'
-// need to feed in the raw data from the editor component into here
 import EditorComponent from './Editor.js'
-import { convertToRaw, EditorState } from 'draft-js';
+import { convertToRaw, EditorState, convertFromRaw} from 'draft-js';
 import BlogPost from "./Blog/BlogPosts.js"
 //potentially add photo uploads here as well
 
@@ -46,11 +51,8 @@ class Upload extends React.Component{
         errors: [],
         bodyPlaceholder: '',
         title: '',
-        titlePlaceholder: 'Name',
         ProjectDescription: '',
-        descriptionPlaceholder: 'Project Description',
         type: 'WebDevelopment',
-        typePlaceholder: '',
         editorState: EditorState.createEmpty(),
     }
     // THis function will be used to determine if we are editing or not
@@ -63,27 +65,27 @@ class Upload extends React.Component{
                 axios.get('/api/Blog/' + splits[i+1])
                 .then((res)=>{
                     console.log("res: ", res)
+                    console.log("res body: ", res.data.Post.body)
                     var theType = res.data.Post.type
-                    console.log("theType: ", theType)
+                    // console.log("theType: ", theType)
                     //get index of select whose value equals the type
                     var theSelect = document.getElementById('select')
-                    console.log("options: ",theSelect.options)
-                    console.log("options length: ", theSelect.options.length)
+                    // console.log("options: ",theSelect.options)
+                    // console.log("options length: ", theSelect.options.length)
                     var selectIndex
                     for(let k = 0; k < theSelect.options.length; k++){
-                        console.log("value cycle: ", theSelect.options[k].value)
+                        // console.log("value cycle: ", theSelect.options[k].value)
                         if(theSelect.options[k].value === theType){
                             selectIndex = k
                             //we want to set the select current value to that index
                             theSelect.selectedIndex = selectIndex
-                            console.log("found select index", selectIndex)
+                            // console.log("found select index", selectIndex)
                         }
                     }
                     this.setState({
                         title: res.data.Post.title,
-                        titlePlaceholder: res.data.Post.title,
                         ProjectDescription: res.data.Post.description,
-                        descriptionPlaceholder: res.data.Post.description,
+                        editorState: EditorState.createWithContent(convertFromRaw(JSON.parse(res.data.Post.body))) 
                     })
                 })
             }
@@ -136,7 +138,7 @@ class Upload extends React.Component{
         if(this.validateForm()){
             this.clearErrors()
             console.log('form validation passed')
-            //set bodyJSONData to Content State
+            //set bodyJSONData to raw JS structure from Content State
             var bodyJSONData = convertToRaw(this.state.editorState.getCurrentContent())
             
             console.log("bodyJSONData: ",bodyJSONData)
@@ -146,7 +148,7 @@ class Upload extends React.Component{
                 title: this.state.title,
                 description: this.state.ProjectDescription,
                 type: this.state.type,
-                body: bodyJSONData
+                body: JSON.stringify(bodyJSONData)
             })
             .then((res)=>{
                 console.log('res: ', res)
@@ -172,10 +174,10 @@ class Upload extends React.Component{
                 <div className="row">
                     <div className="column-half">
                         <div>
-                            <input style={InputStyle} type='text' name='title' placeholder={this.state.titlePlaceholder} onChange={this.onChange.bind(this)}/>
+                            <input style={InputStyle} type='text' name='title' value={this.state.title} placeholder={"Name this post"} onChange={this.onChange.bind(this)}/>
                         </div>
                         <div>
-                            <textarea style={TextAreaStyle} name='ProjectDescription' placeholder={this.state.descriptionPlaceholder} onChange={this.onChange.bind(this)}></textarea>
+                            <textarea style={TextAreaStyle} name='ProjectDescription' value={this.state.ProjectDescription} placeholder={"Describe this post"} onChange={this.onChange.bind(this)}></textarea>
                         </div>
                     </div>
                     <div className="column-half">

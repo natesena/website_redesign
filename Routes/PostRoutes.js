@@ -10,5 +10,6 @@ PostRouter.route('/')
     // added below
 PostRouter.route('/:id')
     .get(PostCTRL.show)
+    .delete(PostCTRL.delete)
 
 module.exports = PostRouter
