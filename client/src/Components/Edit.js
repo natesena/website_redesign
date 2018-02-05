@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import BlogPost from './Blog/BlogPosts.js'
+import Post from './Posts/Posts.js'
 
 class Edit extends React.Component{
     state = {

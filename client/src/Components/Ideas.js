@@ -1,5 +1,5 @@
 import React from 'react'
-import BlogPost from './Blog/BlogPosts.js'
+import Post from './Posts/Posts.js'
 import axios from 'axios'
 
 class Ideas extends React.Component{
@@ -43,10 +43,10 @@ class Ideas extends React.Component{
         }
         return(
             <div>
-            <h1>Blog</h1>
+            <h1>Ideas</h1>
             <p>I want to do pagination on this page and should look up if there is a best practice</p>
                 {this.state.posts.map((post)=>{
-                    return <BlogPost key={post._id} id={post._id} title={post.title} description={post.description} body={JSON.parse(post.body)} bodyVisible={visibility}/>
+                    return <Post key={post._id} id={post._id} title={post.title} description={JSON.parse(post.description)} body={JSON.parse(post.body)} bodyVisible={visibility}/>
                 })}
             </div>
         )

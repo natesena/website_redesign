@@ -7,6 +7,7 @@ import WebDevelopment from './Components/WebDevelopment.js'
 import ProductDesign from './Components/ProductDesign.js'
 import Upload from './Components/Upload.js'
 import Blog from './Components/Blog.js'
+import Ideas from './Components/Ideas.js'
 
 const containerStyle = {
   margin: '50px'
@@ -41,6 +42,9 @@ class App extends Component {
             }} />
             <Route path="/WebDevelopment" render={(props)=>{
               return <WebDevelopment id={id}/>
+            }} />
+            <Route path="/Ideas" render={(props)=>{
+              return <Ideas id={id}/>
             }} />
             <Route path="/ProductDesign" render={(props)=>{
               return <ProductDesign id={id}/>
