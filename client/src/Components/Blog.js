@@ -38,15 +38,19 @@ class Blog extends React.Component{
     }
     render(){
         let visibility = false
+        let controlsVisibility = false
         if(this.state.id){
             visibility = true
+        }
+        if(this.props.id){
+            controlsVisibility = true
         }
         return(
             <div>
             <h1>Blog</h1>
             <p>I want to do pagination on this page and should look up if there is a best practice</p>
                 {this.state.posts.map((post)=>{
-                    return <Post key={post._id} id={post._id} title={post.title} description={post.description} body={JSON.parse(post.body)} bodyVisible={visibility}/>
+                    return <Post key={post._id} id={post._id} title={post.title} description={post.description} body={JSON.parse(post.body)} bodyVisible={visibility} controls={controlsVisibility}/>
                 })}
             </div>
         )

@@ -36,22 +36,27 @@ class Post extends React.Component{
         })
     }
     render(){
+        let controls = null
         let blogBody = null
         if(this.props.bodyVisible){
             blogBody = <div style={blogBodyStyle}>
             {ReactHtmlParser(draftToHtml(this.props.body))}
             </div>
         }  
+        if(this.props.controls){
+            controls =  <div style={postControlStyle}>
+                            <a style={editStyle} href={`/Edit/${this.props.id}`}>edit</a>
+                            <a style={editStyle} href="#trash" onClick={this.deletePost.bind(this)}>Trash</a>
+                        </div>
+        }
+
         return(
             <div className="post" style={divStyle}>
             {/* put an href here to the specific post */}
                 <a style={aStyle} href={`/Blog/${this.props.id}`}><h2>{this.props.title}</h2></a>
                 <p style={pStyle}>{this.props.description}</p>
                 {blogBody}
-                <div style={postControlStyle}>
-                    <a style={editStyle} href={`/Edit/${this.props.id}`}>edit</a>
-                    <a style={editStyle} href="#trash" onClick={this.deletePost.bind(this)}>Trash</a>
-                </div>
+                {controls}
             </div>
         )
     }

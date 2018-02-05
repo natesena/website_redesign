@@ -190,7 +190,7 @@ class Upload extends React.Component{
                         </div>
                     </div>
                     <div className="column-half">
-                        <Post title={this.state.title} description={this.state.ProjectDescription} body={{}} bodyVisible={false}/>
+                        <Post title={this.state.title} description={this.state.ProjectDescription} body={{}} bodyVisible={false} controls={false}/>
                     </div>
                 </div>
                 <select id="select" style={SelectStyle} onChange={this.onSelectChange.bind(this)}>
