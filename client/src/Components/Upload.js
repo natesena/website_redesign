@@ -59,17 +59,23 @@ class Upload extends React.Component{
         var splits = url.split('/')
         for(let i = 0; i < splits.length; i++){
             if(splits[i] === "Edit"){
+                //send request for id after "edit"
                 axios.get('/api/Blog/' + splits[i+1])
                 .then((res)=>{
                     console.log("res: ", res)
                     var theType = res.data.Post.type
+                    console.log("theType: ", theType)
                     //get index of select whose value equals the type
                     var theSelect = document.getElementById('select')
                     console.log("options: ",theSelect.options)
+                    console.log("options length: ", theSelect.options.length)
                     var selectIndex
-                    for(let k = 0; k < theSelect.options; k++){
+                    for(let k = 0; k < theSelect.options.length; k++){
+                        console.log("value cycle: ", theSelect.options[k].value)
                         if(theSelect.options[k].value === theType){
                             selectIndex = k
+                            //we want to set the select current value to that index
+                            theSelect.selectedIndex = selectIndex
                             console.log("found select index", selectIndex)
                         }
                     }
