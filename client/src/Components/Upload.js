@@ -8,7 +8,7 @@ import React from 'react'
 import axios from 'axios'
 import EditorComponent from './Editor.js'
 import { convertToRaw, EditorState, convertFromRaw} from 'draft-js';
-import BlogPost from "./Blog/BlogPosts.js"
+import Post from "./Posts/Posts.js"
 //potentially add photo uploads here as well
 
 const EditorStyle = {
@@ -190,7 +190,7 @@ class Upload extends React.Component{
                         </div>
                     </div>
                     <div className="column-half">
-                        <BlogPost title={this.state.title} description={this.state.ProjectDescription} body={{}} bodyVisible={false}/>
+                        <Post title={this.state.title} description={this.state.ProjectDescription} body={{}} bodyVisible={false}/>
                     </div>
                 </div>
                 <select id="select" style={SelectStyle} onChange={this.onSelectChange.bind(this)}>

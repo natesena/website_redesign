@@ -28,7 +28,7 @@ const pStyle ={
     margin: "10px"
 }
 
-class BlogPost extends React.Component{
+class Post extends React.Component{
     deletePost(){
         axios.delete('/api/Blog/' + this.props.id)
         .then((res)=>{
@@ -57,4 +57,4 @@ class BlogPost extends React.Component{
     }
 }
 
-export default BlogPost
+export default Post
