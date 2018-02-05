@@ -144,16 +144,25 @@ class Upload extends React.Component{
             console.log("bodyJSONData: ",bodyJSONData)
             console.log('tried to submit, title: ' + this.state.title + ', description: ' + this.state.ProjectDescription + ',editorState: ' + this.state.editorState)
             //post request and res
-            axios.post('/api/Blog', {
+            let postData = {
                 title: this.state.title,
                 description: this.state.ProjectDescription,
                 type: this.state.type,
                 body: JSON.stringify(bodyJSONData)
-            })
-            .then((res)=>{
-                console.log('res: ', res)
-                //dependent on success or not, redirect to the new post
-            })
+            }
+            if(this.props.id){
+                axios.patch('/api/Blog/' + this.props.id, postData)
+                .then((res)=>{
+                    console.log("res: ", res)
+                })
+            }
+            else{
+                    axios.post('/api/Blog', postData)
+                .then((res)=>{
+                    console.log('res: ', res)
+                    //dependent on success or not, redirect to the new post
+                })
+            }
         }
         
     }

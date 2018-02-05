@@ -13,7 +13,23 @@ const containerStyle = {
 }
 
 class App extends Component {
+  getID(){
+    let url = window.location.href
+    var splits = url.split('/')
+    var idIndex
+    for(let i = 0; i < splits.length; i++){
+        if(splits[i] === "Blog" || splits[i] === "WebDevelopment" || splits[i] === "ProductDesign" || splits[i] === "UploadProject" || splits[i] === "Edit" ){
+            idIndex = i + 1
+        }
+    }
+    return splits[idIndex]? splits[idIndex]:false
+  }
   render() {
+    let id = null
+    let idExists = this.getID()
+    if(idExists){
+      id = idExists
+    }
     return (
       
       <div className="App">
@@ -24,19 +40,19 @@ class App extends Component {
               return <Home/>
             }} />
             <Route path="/WebDevelopment" render={(props)=>{
-              return <WebDevelopment/>
+              return <WebDevelopment id={id}/>
             }} />
             <Route path="/ProductDesign" render={(props)=>{
-              return <ProductDesign/>
+              return <ProductDesign id={id}/>
             }} />
             <Route path="/UploadProject" render={(props)=>{
               return <Upload/>
             }} />
             <Route path="/Edit" render={(props)=>{
-              return <Upload/>
+              return <Upload id={id}/>
             }} />
             <Route path="/Blog" render={(props)=>{
-              return <Blog/>
+              return <Blog id={id}/>
             }} />
           </Switch>
         </div>

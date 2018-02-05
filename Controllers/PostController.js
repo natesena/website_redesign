@@ -38,5 +38,13 @@ module.exports = {
             }
             res.send({ message: 'success', Post})
         })
+    },
+    edit: (req,res)=>{
+        Post.findByIdAndUpdate(req.params.id, req.body, (err, updatedPost)=>{
+            if(err){
+                res.send({message: 'failure', err: err.code})
+            }
+            res.send({ message: 'success', updatedPost})
+        })
     }
 }

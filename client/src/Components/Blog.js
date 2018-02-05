@@ -7,17 +7,6 @@ class Blog extends React.Component{
         id: '',
         posts:[]
     }
-    getID(){
-        let url = window.location.href
-        var splits = url.split('/')
-        var idIndex
-        for(let i = 0; i < splits.length; i++){
-            if(splits[i] === "Blog"){
-                idIndex = i + 1
-            }
-        }
-        return splits[idIndex]? splits[idIndex]:false
-    }
     getOneBlogPost(id){
         axios.get('/api/Blog/' + id)
         .then((res)=>{
@@ -37,8 +26,8 @@ class Blog extends React.Component{
             })
         })
     }
-    onLoad(){
-        let id = this.getID()
+    componentDidMount(){
+        let id = this.props.id
         console.log(id)
         if(id){
             this.getOneBlogPost(id)
@@ -46,9 +35,6 @@ class Blog extends React.Component{
         else{
             this.getAllBlogPosts()
         }
-    }
-    componentDidMount(){
-        this.onLoad()
     }
     render(){
         let visibility = false
