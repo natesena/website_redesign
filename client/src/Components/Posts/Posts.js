@@ -54,7 +54,9 @@ class Post extends React.Component{
             <div className="post" style={divStyle}>
             {/* put an href here to the specific post */}
                 <a style={aStyle} href={`/${this.props.type}/${this.props.id}`}><h2>{this.props.title}</h2></a>
-                <p style={pStyle}>{this.props.description}</p>
+                <div>
+                    {ReactHtmlParser(draftToHtml(this.props.description))}
+                </div>
                 {blogBody}
                 {controls}
             </div>
