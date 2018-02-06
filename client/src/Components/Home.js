@@ -9,7 +9,7 @@ class Home extends React.Component{
     componentDidMount(){
         axios.get('/api/Blog')
         .then((res)=>{
-            console.log("res: ", res)
+            // console.log("res: ", res)
             this.setState({
                 posts: [...res.data.Posts]
             })

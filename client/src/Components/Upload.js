@@ -11,7 +11,6 @@ import { convertToRaw, EditorState, convertFromRaw} from 'draft-js';
 import draftToHtml from 'draftjs-to-html'
 import Post from "./Posts/Posts.js"
 
-//potentially add photo uploads here as well
 
 const EditorStyle = {
     marginTop: "10px",
@@ -27,15 +26,8 @@ const errorStyle = {
 const InputStyle = {
     border: "none",
     margin: "20px 0 20px 0",
-    border: "1px solid black",
+    borderBottom: "1px solid black",
 
-}
-const TextAreaStyle = {
-    border: "none",
-    margin: "5px 0",
-    width: "100%",
-    border: "1px solid black",
-    minHeight: "100px"
 }
 
 const SelectStyle = {
@@ -49,6 +41,7 @@ const SelectStyle = {
 
 class Upload extends React.Component{
     //must create an empty editor state if going to upload an rich text document with draft.js
+    //this.state.emptydescription is to clarify what an empty description looks like for form validation
     state = {
         errors: [],
         emptyDescription: '',
@@ -57,15 +50,15 @@ class Upload extends React.Component{
         type: 'WebDevelopment',
         editorState: EditorState.createEmpty(),
     }
-    // THis function will be used to determine if we are editing or not
+    // THis function will be used to determine if we are editing an old post or making a new one
     componentDidMount(){
+        //if there is an id, we are editing an old post
         if(this.props.id){
             axios.get('/api/Blog/' + this.props.id)
             .then((res)=>{
-                console.log("res: ", res)
-                console.log("res body: ", res.data.Post.body)
+                // console.log("res: ", res)
+                // console.log("res body: ", res.data.Post.body)
                 var theType = res.data.Post.type
-                // console.log("theType: ", theType)
                 //get index of select whose value equals the type
                 var theSelect = document.getElementById('select')
                 // console.log("options: ",theSelect.options)
@@ -87,6 +80,8 @@ class Upload extends React.Component{
                 })
             })
         }
+        // if no id, then we are editing a new post and I want to check what an 
+        //empty posts editor state is like for form validation
         else{
             this.setState({
                 emptyDescription: convertToRaw(this.state.descriptionEditorState.getCurrentContent())
@@ -122,8 +117,8 @@ class Upload extends React.Component{
         //if the html from the project description is empty
         var descriptionHTML = draftToHtml(convertToRaw(this.state.descriptionEditorState.getCurrentContent()))
         var emptyDescriptionHTML = draftToHtml(this.state.emptyDescription)
-        console.log("description html: ", descriptionHTML)
-        console.log("emptyHTML: ", emptyDescriptionHTML)
+        // console.log("description html: ", descriptionHTML)
+        // console.log("emptyHTML: ", emptyDescriptionHTML)
         if(descriptionHTML === emptyDescriptionHTML){
             this.throwFormError("Error: Missing Description")
             return false
@@ -132,11 +127,11 @@ class Upload extends React.Component{
         return true
     }
     throwFormError(errorText){
-        console.log("adding error: ", errorText)
+        // console.log("adding error: ", errorText)
         this.setState({
             errors: [...this.state.errors, errorText]
         }, ()=>{
-            console.log("errors length: ", this.state.errors.length)
+            // console.log("errors length: ", this.state.errors.length)
         })
     }   
     clearErrors(){
@@ -191,23 +186,25 @@ class Upload extends React.Component{
                     return <p key="{num}" style={errorStyle}>{error}</p>
                 })}
                 <h1>Upload Here</h1>
-                <div className="row">
-                    <div className="column-half">
-                        <div>
-                            <input style={InputStyle} type='text' name='title' value={this.state.title} placeholder={"Name this post"} onChange={this.onChange.bind(this)}/>
-                        </div>
+                <div>
+                    <h3>Post Preview</h3>
+                    <Post title={this.state.title} description={convertToRaw(this.state.descriptionEditorState.getCurrentContent())} body={{}} bodyVisible={false} controls={false}/>
+                </div>
+                <div >
+                    <div className="center">
+                        <input className="name-input" style={InputStyle} type='text' name='title' value={this.state.title} placeholder={"Name this post"} onChange={this.onChange.bind(this)}/>
                     </div>
-                    <div className="column-half">
-                        <Post title={this.state.title} description={convertToRaw(this.state.descriptionEditorState.getCurrentContent())} body={{}} bodyVisible={false} controls={false}/>
+                    <div className="center">
+                        <select id="select" style={SelectStyle} onChange={this.onSelectChange.bind(this)}>
+                            <option value="" disabled defaultValue>Select Your Post Category</option>
+                            <option value="WebDevelopment">Web Development</option>
+                            <option value="ProductDesign">Product Design</option>
+                            <option value="Blog">Blog</option>
+                            <option value="Ideas">Ideas</option>
+                        </select>
                     </div>
                 </div>
-                <select id="select" style={SelectStyle} onChange={this.onSelectChange.bind(this)}>
-                    <option value="" disabled defaultValue>Select Your Post Category</option>
-                    <option value="WebDevelopment">Web Development</option>
-                    <option value="ProductDesign">Product Design</option>
-                    <option value="Blog">Blog</option>
-                    <option value="Ideas">Ideas</option>
-                </select>
+                
                 <div style={EditorStyle}>
                     <h2>Post Description</h2>
                     <EditorComponent onChange={this.onDescriptionStateChange.bind(this)} editorState={this.state.descriptionEditorState}/>

@@ -24,9 +24,7 @@ const blogBodyStyle = {
     padding: '10px',
     margin: "10px 0"
 }
-const pStyle ={
-    margin: "10px"
-}
+
 
 class Post extends React.Component{
     deletePost(){

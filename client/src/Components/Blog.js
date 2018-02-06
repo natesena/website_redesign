@@ -28,7 +28,7 @@ class Blog extends React.Component{
     }
     componentDidMount(){
         let id = this.props.id
-        console.log(id)
+        // console.log(id)
         if(id){
             this.getOneBlogPost(id)
         }
@@ -50,7 +50,7 @@ class Blog extends React.Component{
             <h1>Blog</h1>
             <p>I want to do pagination on this page and should look up if there is a best practice</p>
                 {this.state.posts.map((post)=>{
-                    return <Post key={post._id} id={post._id} title={post.title} description={JSON.parse(post.description)} body={JSON.parse(post.body)} bodyVisible={visibility} controls={controlsVisibility}/>
+                    return <Post key={post._id} type={post.type} id={post._id} title={post.title} description={JSON.parse(post.description)} body={JSON.parse(post.body)} bodyVisible={visibility} controls={controlsVisibility}/>
                 })}
             </div>
         )
