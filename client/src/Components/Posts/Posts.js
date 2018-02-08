@@ -3,6 +3,7 @@ import draftToHtml from 'draftjs-to-html'
 import ReactHtmlParser from 'react-html-parser';
 import axios from 'axios'
 import 'font-awesome/css/font-awesome.min.css'
+import {Redirect} from 'react-router-dom'
 
 const containerStyle = {
     boxShadow: '0px 3px 3px rgba(10, 10, 10, .2)',
@@ -27,10 +28,15 @@ const blogBodyStyle = {
 
 
 class Post extends React.Component{
+    state={
+        redirect:false
+    }
     deletePost(){
         axios.delete('/api/Blog/' + this.props.id)
         .then((res)=>{
-            console.log("res: ", res)
+            this.setState({
+                redirect: true
+            })
         })
     }
     render(){
@@ -62,13 +68,16 @@ class Post extends React.Component{
             divStyle = containerStyle
             titleStyle = <h2>{this.props.title}</h2>
         }
-
+        if(this.state.redirect){//we will redirect when we have hit delete
+            return <Redirect to={`/${this.props.type}`} />
+        }
         return(
             <div className={divClass} style={divStyle}>
                 <a style={aStyle} href={`/${this.props.type}/${this.props.id}`}>{titleStyle}</a>
                 {blogDescription}
                 {blogBody}
                 {controls}
+                <p>Let's include a link button to copy the link :)</p>
             </div>
         )
     }
