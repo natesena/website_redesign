@@ -9,7 +9,7 @@ import axios from 'axios'
 import EditorComponent from './Editor.js'
 import { convertToRaw, EditorState, convertFromRaw} from 'draft-js';
 import draftToHtml from 'draftjs-to-html'
-import ReactHtmlParser from 'react-html-parser';
+// import ReactHtmlParser from 'react-html-parser';
 import Post from "./Posts/Posts.js"
 import { Redirect } from 'react-router-dom'
 

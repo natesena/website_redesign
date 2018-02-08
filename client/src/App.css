@@ -35,3 +35,37 @@ h1,h2, p, a{
 .name-input{
   width: 100%
 }
+.NavBar {
+  background-color: black;
+  color: white;
+  padding: 20px
+}
+.NavBar .fa{
+  display: none
+}
+.NavBar ul{
+  list-style-type: none;
+  margin: 0
+}
+.NavList{
+  display: inline-block
+}
+.NavBar li{
+  display: inline;
+  margin: 0
+}
+/* if on mobile */
+@media (max-width: 600px){
+  .NavBar{
+
+  }
+  .NavBar .fa{
+    display: inline-block
+  }
+  .NavBar ul{
+    display: none
+  }
+  .NavBar li{
+
+  }
+}

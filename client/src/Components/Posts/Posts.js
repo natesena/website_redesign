@@ -51,8 +51,8 @@ class Post extends React.Component{
             })
         })
     }
-    copyLink(obj){
-        let shareLink = `${__dirname}/${this.props.type}/${this.props.id}` 
+    copyLink(){
+        // let shareLink = `${__dirname}/${this.props.type}/${this.props.id}` 
         // event.clipboardData.setData("text/plain", shareLink);
         console.log("i wish this copied")
     }
