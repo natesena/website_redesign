@@ -10,6 +10,7 @@ import EditorComponent from './Editor.js'
 import { convertToRaw, EditorState, convertFromRaw} from 'draft-js';
 import draftToHtml from 'draftjs-to-html'
 import Post from "./Posts/Posts.js"
+import { Redirect } from 'react-router-dom'
 
 
 const EditorStyle = {
@@ -43,20 +44,23 @@ class Upload extends React.Component{
     //must create an empty editor state if going to upload an rich text document with draft.js
     //this.state.emptydescription is to clarify what an empty description looks like for form validation
     state = {
+        id: null,
         errors: [],
         emptyDescription: '',
         title: '',
         descriptionEditorState: EditorState.createEmpty(),
         type: 'WebDevelopment',
         editorState: EditorState.createEmpty(),
+        redirectToNewPage: false
     }
     // THis function will be used to determine if we are editing an old post or making a new one
     componentDidMount(){
         //if there is an id, we are editing an old post
-        if(this.props.id){
-            axios.get('/api/Blog/' + this.props.id)
+        let id = this.props.getId()
+        if(id){
+            axios.get('/api/Blog/' + id)
             .then((res)=>{
-                // console.log("res: ", res)
+                console.log("res: ", res)
                 // console.log("res body: ", res.data.Post.body)
                 var theType = res.data.Post.type
                 //get index of select whose value equals the type
@@ -74,7 +78,9 @@ class Upload extends React.Component{
                     }
                 }
                 this.setState({
+                    id: res.data.Post._id,
                     title: res.data.Post.title,
+                    type: res.data.Post.type,
                     descriptionEditorState: EditorState.createWithContent(convertFromRaw(JSON.parse(res.data.Post.description))) ,
                     editorState: EditorState.createWithContent(convertFromRaw(JSON.parse(res.data.Post.body))) 
                 })
@@ -156,10 +162,17 @@ class Upload extends React.Component{
                 type: this.state.type,
                 body: JSON.stringify(bodyJSONData)
             }
-            if(this.props.id){
-                axios.patch('/api/Blog/' + this.props.id, postData)
+            let id = this.props.getId()
+            console.log("submit id: ", id)
+            if(id){
+                axios.patch('/api/Blog/' + id, postData)
                 .then((res)=>{
                     console.log("res: ", res)
+                    if(res.data.updatedPost){
+                        this.setState({
+                            redirectToNewPage: true
+                        })
+                    }
                 })
             }
             else{
@@ -167,6 +180,12 @@ class Upload extends React.Component{
                 .then((res)=>{
                     console.log('res: ', res)
                     //dependent on success or not, redirect to the new post
+                    if(res.data.newpost){
+                        this.setState({
+                            id: res.data.newpost._id,
+                            redirectToNewPage: true
+                        })
+                    }
                 })
             }
         }
@@ -180,42 +199,49 @@ class Upload extends React.Component{
             editor = <EditorComponent
                      onChange={this.onEditorStateChange.bind(this)} editorState={this.state.editorState}/>
         }
-        return(
-            <div>
-                {this.state.errors.map((error, num)=>{
-                    return <p key="{num}" style={errorStyle}>{error}</p>
-                })}
-                <h1>Upload Here</h1>
+        if(this.state.redirectToNewPage){
+            let redirectLink = `/${this.state.type}/${this.state.id}`
+            return <Redirect to={redirectLink} />
+        }
+        else{   
+            return(
                 <div>
-                    <h3>Post Preview</h3>
-                    <Post title={this.state.title} description={convertToRaw(this.state.descriptionEditorState.getCurrentContent())} body={{}} bodyVisible={false} controls={false}/>
-                </div>
-                <div >
-                    <div className="center">
-                        <input className="name-input" style={InputStyle} type='text' name='title' value={this.state.title} placeholder={"Name this post"} onChange={this.onChange.bind(this)}/>
+                    {this.state.errors.map((error, num)=>{
+                        return <p key="{num}" style={errorStyle}>{error}</p>
+                    })}
+                    <h1>Upload Here</h1>
+                    <div>
+                        <h3>Post Preview</h3>
+                        <Post format={"many"}title={this.state.title} description={convertToRaw(this.state.descriptionEditorState.getCurrentContent())} body={{}} descriptionVisible={true} bodyVisible={false} controls={false}/>
                     </div>
-                    <div className="center">
-                        <select id="select" style={SelectStyle} onChange={this.onSelectChange.bind(this)}>
-                            <option value="" disabled defaultValue>Select Your Post Category</option>
-                            <option value="WebDevelopment">Web Development</option>
-                            <option value="ProductDesign">Product Design</option>
-                            <option value="Blog">Blog</option>
-                            <option value="Ideas">Ideas</option>
-                        </select>
+                    <div >
+                        <div className="center">
+                            <input className="name-input" style={InputStyle} type='text' name='title' value={this.state.title} placeholder={"Name this post"} onChange={this.onChange.bind(this)}/>
+                        </div>
+                        <div className="center">
+                            <select id="select" style={SelectStyle} onChange={this.onSelectChange.bind(this)}>
+                                <option value="" disabled defaultValue>Select Your Post Category</option>
+                                <option value="WebDevelopment">Web Development</option>
+                                <option value="ProductDesign">Product Design</option>
+                                <option value="Blog">Blog</option>
+                                <option value="Ideas">Ideas</option>
+                            </select>
+                        </div>
                     </div>
+                    
+                    <div style={EditorStyle}>
+                        <h2>Post Description</h2>
+                        <EditorComponent onChange={this.onDescriptionStateChange.bind(this)} editorState={this.state.descriptionEditorState}/>
+                    </div>
+                    <div style={EditorStyle}>
+                            <h2>Post Body</h2>
+                            {editor}
+                    </div>
+                    <button onClick={this.submit.bind(this)}>Submit</button>
                 </div>
-                
-                <div style={EditorStyle}>
-                    <h2>Post Description</h2>
-                    <EditorComponent onChange={this.onDescriptionStateChange.bind(this)} editorState={this.state.descriptionEditorState}/>
-                </div>
-                <div style={EditorStyle}>
-                        <h2>Post Body</h2>
-                        {editor}
-                </div>
-                <button onClick={this.submit.bind(this)}>Submit</button>
-            </div>
-        )
+            )
+        }
+        
     }
 }
 

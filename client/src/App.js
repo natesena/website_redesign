@@ -26,11 +26,6 @@ class App extends Component {
     return splits[idIndex]? splits[idIndex]:false
   }
   render() {
-    let id = null
-    let idExists = this.getID()
-    if(idExists){
-      id = idExists
-    }
     return (
       
       <div className="App">
@@ -41,22 +36,22 @@ class App extends Component {
               return <Home/>
             }} />
             <Route path="/WebDevelopment" render={(props)=>{
-              return <WebDevelopment id={id}/>
+              return <WebDevelopment  getId={this.getID}/>
             }} />
             <Route path="/Ideas" render={(props)=>{
-              return <Ideas id={id}/>
+              return <Ideas getId={this.getID}/>
             }} />
             <Route path="/ProductDesign" render={(props)=>{
-              return <ProductDesign id={id}/>
+              return <ProductDesign getId={this.getID}/>
             }} />
             <Route path="/UploadProject" render={(props)=>{
-              return <Upload/>
+              return <Upload getId={this.getID}/>
             }} />
             <Route path="/Edit" render={(props)=>{
-              return <Upload id={id}/>
+              return <Upload getId={this.getID}/>
             }} />
             <Route path="/Blog" render={(props)=>{
-              return <Blog id={id}/>
+              return <Blog getId={this.getID}/>
             }} />
           </Switch>
         </div>

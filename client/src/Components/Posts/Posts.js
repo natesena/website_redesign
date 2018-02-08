@@ -2,8 +2,9 @@ import React from 'react'
 import draftToHtml from 'draftjs-to-html'
 import ReactHtmlParser from 'react-html-parser';
 import axios from 'axios'
+import 'font-awesome/css/font-awesome.min.css'
 
-const divStyle = {
+const containerStyle = {
     boxShadow: '0px 3px 3px rgba(10, 10, 10, .2)',
     padding: '10px'
 }
@@ -14,13 +15,12 @@ const aStyle = {
 }
 const editStyle = {
     margin: "2px",
-    textDecoration: "none"
+    verticalAlign: "middle"
 }
 const postControlStyle = {
     textAlign: 'right'
 }
 const blogBodyStyle = {
-    boxShadow: '0px 3px 3px rgba(10, 10, 10, .2)',
     padding: '10px',
     margin: "10px 0"
 }
@@ -34,8 +34,12 @@ class Post extends React.Component{
         })
     }
     render(){
+        let divClass = null //-------------
+        let divStyle = null
+        let titleStyle = <h1>{this.props.title}</h1>
         let controls = null
         let blogBody = null
+        let blogDescription = null
         if(this.props.bodyVisible){
             blogBody = <div style={blogBodyStyle}>
             {ReactHtmlParser(draftToHtml(this.props.body))}
@@ -43,18 +47,26 @@ class Post extends React.Component{
         }  
         if(this.props.controls){
             controls =  <div style={postControlStyle}>
-                            <a style={editStyle} href={`/Edit/${this.props.id}`}>edit</a>
-                            <a style={editStyle} href="#trash" onClick={this.deletePost.bind(this)}>Trash</a>
+                            <a style={editStyle} href={`/Edit/${this.props.id}`}><i className="fa fa-edit"></i></a>
+                            <a style={editStyle} href="#trash" onClick={this.deletePost.bind(this)}><i className="fa fa-trash"></i></a> 
                         </div>
+        }
+        if(this.props.descriptionVisible){
+            blogDescription = <div>
+                                {ReactHtmlParser(draftToHtml(this.props.description))}
+                            </div>
+        }
+        if(this.props.format === "many"){
+            //have totally different appearance
+            divClass = "post"
+            divStyle = containerStyle
+            titleStyle = <h2>{this.props.title}</h2>
         }
 
         return(
-            <div className="post" style={divStyle}>
-            {/* put an href here to the specific post */}
-                <a style={aStyle} href={`/${this.props.type}/${this.props.id}`}><h2>{this.props.title}</h2></a>
-                <div>
-                    {ReactHtmlParser(draftToHtml(this.props.description))}
-                </div>
+            <div className={divClass} style={divStyle}>
+                <a style={aStyle} href={`/${this.props.type}/${this.props.id}`}>{titleStyle}</a>
+                {blogDescription}
                 {blogBody}
                 {controls}
             </div>
