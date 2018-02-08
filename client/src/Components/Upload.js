@@ -9,6 +9,7 @@ import axios from 'axios'
 import EditorComponent from './Editor.js'
 import { convertToRaw, EditorState, convertFromRaw} from 'draft-js';
 import draftToHtml from 'draftjs-to-html'
+import ReactHtmlParser from 'react-html-parser';
 import Post from "./Posts/Posts.js"
 import { Redirect } from 'react-router-dom'
 
@@ -100,7 +101,7 @@ class Upload extends React.Component{
         })
     }
     onDescriptionStateChange(editorState){
-        console.log("description typing")
+        // console.log("description typing")
         this.setState({
             descriptionEditorState: editorState
         })
@@ -129,7 +130,7 @@ class Upload extends React.Component{
             this.throwFormError("Error: Missing Description")
             return false
         }
-        console.log('form validation passed')
+        // console.log('form validation passed')
         return true
     }
     throwFormError(errorText){
@@ -146,6 +147,8 @@ class Upload extends React.Component{
         })
     }
     // get the JSON object and send it post body
+    //I would like to send myself an email of the post
+
     submit(evt){
         evt.preventDefault()
         //check if a name or description has been given
@@ -154,7 +157,7 @@ class Upload extends React.Component{
             //set bodyJSONData to raw JS structure from Content State
             var bodyJSONData = convertToRaw(this.state.editorState.getCurrentContent())
             var descriptionJSONData = convertToRaw(this.state.descriptionEditorState.getCurrentContent())
-            console.log("bodyJSONData: ",bodyJSONData)
+            alert("remember to email yourself the post for safe keeping")
             //post request and res
             let postData = {
                 title: this.state.title,
