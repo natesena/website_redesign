@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import Post from './Posts/Posts.js'
+import AframeHome from './Aframe/HomeScene.js'
 // import ReactPaginate from 'react-paginate';
 
 class Home extends React.Component{
@@ -22,11 +23,16 @@ class Home extends React.Component{
     render(){
         return(
             <div>
+                 <div className="aframe">
+                    <AframeHome/>
+                </div>
+                <div class="body-container">
                 <h1>This is the home</h1>
                 <p>I want to have an animation that zooms in on each post in hover</p>
                 {this.state.posts.map((post)=>{
                     return <Post key={post._id} onDelete={this.hideDeletedPost.bind(this)} home={true} format={"many"} type={post.type} id={post._id} title={post.title} description={JSON.parse(post.description)} bodyVisible={false} descriptionVisible={true} controls={true}/>
                 })}
+                </div>
             </div>
         )
     }

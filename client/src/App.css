@@ -2,6 +2,9 @@
 body  {
   font-family: 'Roboto', sans-serif;
 }
+.body-container{
+  margin: 50px
+}
 .row{
   width: 100%
 }
@@ -28,7 +31,9 @@ h1,h2, p, a{
   margin: 0;
   padding: 0
 }
-
+.aframe{
+  height: 300px
+}
 .center{
   margin: 0 auto
 }
@@ -54,18 +59,32 @@ h1,h2, p, a{
   display: inline;
   margin: 0
 }
+.NavBar li:hover{
+  font-size: 1.25em
+}
 /* if on mobile */
 @media (max-width: 600px){
   .NavBar{
 
   }
+ 
   .NavBar .fa{
+    vertical-align: top;
     display: inline-block
   }
   .NavBar ul{
+    vertical-align: top;
     display: none
   }
   .NavBar li{
-
+    margin: 5px;
+    text-align: center;
+    display: block
   }
 }
+@media (min-width: 601px){
+  .NavBar ul{
+    display: block
+  }
+}
+

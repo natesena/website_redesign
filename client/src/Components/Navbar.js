@@ -12,7 +12,7 @@ const LinkStyle = {
 class Navbar extends React.Component{
     dropDownMenu(){
         let menuList = document.getElementById('menu-list')
-        // console.log("menuList: ",menuList.style)
+        console.log("menuList: ",menuList.style)
         if(menuList.style.display === '' || menuList.style.display === 'none'){
             // console.log('sliding down')
             $('.NavList').slideDown()
@@ -27,7 +27,7 @@ class Navbar extends React.Component{
     render(){
         return (
             <div className='NavBar'>
-                <i className="fa fa-bars" onClick={this.dropDownMenu}></i>
+                <i className="toggle-nav fa fa-bars" onClick={this.dropDownMenu}></i>
                 <ul id="menu-list" className="NavList">
                     <li><Link to='/' style={LinkStyle}>Home</Link></li>
                     <li><Link to='/WebDevelopment' style={LinkStyle}>Web Development</Link></li>

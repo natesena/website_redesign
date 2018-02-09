@@ -9,9 +9,7 @@ import Upload from './Components/Upload.js'
 import Blog from './Components/Blog.js'
 import Ideas from './Components/Ideas.js'
 
-const containerStyle = {
-  margin: '50px'
-}
+
 
 class App extends Component {
   getID(){
@@ -30,7 +28,7 @@ class App extends Component {
       
       <div className="App">
         <Navbar/>
-        <div style={containerStyle}>
+        <div>
           <Switch>
             <Route exact path="/" render={(props)=>{
               return <Home/>
