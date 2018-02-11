@@ -6,8 +6,10 @@ import 'font-awesome/css/font-awesome.min.css'
 const LinkStyle = {
     margin: '10px',
     textDecoration: 'none',
-    color: 'white'
+    color: 'white',
+    textShadow: "1px 1px #AAA"
 }
+
 
 class Navbar extends React.Component{
     dropDownMenu(){
@@ -37,6 +39,7 @@ class Navbar extends React.Component{
                     <li><Link to='/UploadProject' style={LinkStyle}>Upload</Link></li>
                 </ul>
             </div>
+            
         )
     }
 }

@@ -4,6 +4,10 @@ import Post from './Posts/Posts.js'
 import AframeHome from './Aframe/HomeScene.js'
 // import ReactPaginate from 'react-paginate';
 
+let aframeStyle= {
+    height: window.innerHeight,
+}
+
 class Home extends React.Component{
     state={
         posts: []
@@ -23,10 +27,10 @@ class Home extends React.Component{
     render(){
         return(
             <div>
-                 <div className="aframe">
-                    <AframeHome/>
+                 <div className="aframe" style={aframeStyle}>
+                    <AframeHome posts={this.state.posts}/>
                 </div>
-                <div class="body-container">
+                <div className="body-container">
                 <h1>This is the home</h1>
                 <p>I want to have an animation that zooms in on each post in hover</p>
                 {this.state.posts.map((post)=>{
