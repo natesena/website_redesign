@@ -14,7 +14,7 @@ const LinkStyle = {
 class Navbar extends React.Component{
     dropDownMenu(){
         let menuList = document.getElementById('menu-list')
-        console.log("menuList: ",menuList.style)
+        // console.log("menuList: ",menuList.style)
         if(menuList.style.display === '' || menuList.style.display === 'none'){
             // console.log('sliding down')
             $('.NavList').slideDown()
@@ -27,8 +27,18 @@ class Navbar extends React.Component{
         }
     }
     render(){
+        let navStyle = {
+            backgroundColor: 'black'
+        }
+        console.log('window href: ', window.location.href)
+        if(window.location.href === window.location.origin + '/'){
+            navStyle = {
+                background: "transparent",
+                
+            }
+        }
         return (
-            <div className='NavBar'>
+            <div className='NavBar' style={navStyle}>
                 <i className="toggle-nav fa fa-bars" onClick={this.dropDownMenu}></i>
                 <ul id="menu-list" className="NavList">
                     <li><Link to='/' style={LinkStyle}>Home</Link></li>

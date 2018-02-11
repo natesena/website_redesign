@@ -43,9 +43,9 @@ h1,h2, p, a{
   width: 100%
 }
 .NavBar {
+  width: 100%;
   position: absolute;
   z-index: 2;
-  background-color: black;
   color: white;
   padding: 20px
 }
