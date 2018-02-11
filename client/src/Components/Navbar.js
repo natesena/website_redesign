@@ -10,7 +10,6 @@ const LinkStyle = {
     textShadow: "1px 1px #AAA"
 }
 
-
 class Navbar extends React.Component{
     dropDownMenu(){
         let menuList = document.getElementById('menu-list')
@@ -28,13 +27,14 @@ class Navbar extends React.Component{
     }
     render(){
         let navStyle = {
-            backgroundColor: 'black'
+            backgroundColor: 'black',
+            // width: window.innerWidth
         }
-        console.log('window href: ', window.location.href)
+        // console.log('window href: ', window.location.href)
         if(window.location.href === window.location.origin + '/'){
             navStyle = {
                 background: "transparent",
-                
+                // width: window.innerWidth
             }
         }
         return (
