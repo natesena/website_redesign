@@ -8,7 +8,7 @@ class Blog extends React.Component{
         posts:[]
     }
     getOneBlogPost(id){
-        axios.get('/api/Blog/' + id)
+        axios.get('/api/Posts/' + id)
         .then((res)=>{
             console.log("res: ", res)
             this.setState({
@@ -18,7 +18,7 @@ class Blog extends React.Component{
         })
     }
     getAllBlogPosts(){
-        axios.get('/api/Blog/', {params:{type: "Blog"}})
+        axios.get('/api/Posts/', {params:{type: "Blog"}})
         .then((res)=>{
             console.log("res: ", res)
             this.setState({
@@ -53,7 +53,7 @@ class Blog extends React.Component{
             title = null
         }
         return(
-            <div>
+            <div className="body-drop">
                 <div className="body-container">
                     {title}
                     {this.state.posts.map((post)=>{

@@ -11,7 +11,7 @@ mongoose.connect(MONGODB_URI, (err)=>{
     console.log(err||"connected to Mongo")
 })
 app.use(bodyParser.json())
-app.use('/api/Blog', PostRouter)
+app.use('/api/Posts', PostRouter)
 
 app.get('/api', (req, res) => {
     res.json({message: "API root."})

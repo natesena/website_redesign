@@ -59,7 +59,7 @@ class Upload extends React.Component{
         //if there is an id, we are editing an old post
         let id = this.props.getId()
         if(id){
-            axios.get('/api/Blog/' + id)
+            axios.get('/api/Posts/' + id)
             .then((res)=>{
                 console.log("res: ", res)
                 // console.log("res body: ", res.data.Post.body)
@@ -168,7 +168,7 @@ class Upload extends React.Component{
             let id = this.props.getId()
             console.log("submit id: ", id)
             if(id){
-                axios.patch('/api/Blog/' + id, postData)
+                axios.patch('/api/Posts/' + id, postData)
                 .then((res)=>{
                     console.log("res: ", res)
                     if(res.data.updatedPost){
@@ -179,7 +179,7 @@ class Upload extends React.Component{
                 })
             }
             else{
-                    axios.post('/api/Blog', postData)
+                    axios.post('/api/Posts', postData)
                 .then((res)=>{
                     console.log('res: ', res)
                     //dependent on success or not, redirect to the new post
@@ -208,39 +208,41 @@ class Upload extends React.Component{
         }
         else{   
             return(
-                <div>
-                    {this.state.errors.map((error, num)=>{
-                        return <p key="{num}" style={errorStyle}>{error}</p>
-                    })}
-                    <h1>Upload Here</h1>
-                    <div>
-                        <h3>Post Preview</h3>
-                        <Post format={"many"}title={this.state.title} description={convertToRaw(this.state.descriptionEditorState.getCurrentContent())} body={{}} descriptionVisible={true} bodyVisible={false} controls={false}/>
-                    </div>
-                    <div >
-                        <div className="center">
-                            <input className="name-input" style={InputStyle} type='text' name='title' value={this.state.title} placeholder={"Name this post"} onChange={this.onChange.bind(this)}/>
+                <div className="body-drop">
+                    <div className="body-container">
+                        {this.state.errors.map((error, num)=>{
+                            return <p key="{num}" style={errorStyle}>{error}</p>
+                        })}
+                        <h1>Upload Here</h1>
+                        <div>
+                            <h3>Post Preview</h3>
+                            <Post format={"many"}title={this.state.title} description={convertToRaw(this.state.descriptionEditorState.getCurrentContent())} body={{}} descriptionVisible={true} bodyVisible={false} controls={false}/>
                         </div>
-                        <div className="center">
-                            <select id="select" style={SelectStyle} onChange={this.onSelectChange.bind(this)}>
-                                <option value="" disabled defaultValue>Select Your Post Category</option>
-                                <option value="WebDevelopment">Web Development</option>
-                                <option value="ProductDesign">Product Design</option>
-                                <option value="Blog">Blog</option>
-                                <option value="Ideas">Ideas</option>
-                            </select>
+                        <div >
+                            <div className="center">
+                                <input className="name-input" style={InputStyle} type='text' name='title' value={this.state.title} placeholder={"Name this post"} onChange={this.onChange.bind(this)}/>
+                            </div>
+                            <div className="center">
+                                <select id="select" style={SelectStyle} onChange={this.onSelectChange.bind(this)}>
+                                    <option value="" disabled defaultValue>Select Your Post Category</option>
+                                    <option value="WebDevelopment">Web Development</option>
+                                    <option value="ProductDesign">Product Design</option>
+                                    <option value="Blog">Blog</option>
+                                    <option value="Ideas">Ideas</option>
+                                </select>
+                            </div>
                         </div>
+                        
+                        <div style={EditorStyle}>
+                            <h2>Post Description</h2>
+                            <EditorComponent onChange={this.onDescriptionStateChange.bind(this)} editorState={this.state.descriptionEditorState}/>
+                        </div>
+                        <div style={EditorStyle}>
+                                <h2>Post Body</h2>
+                                {editor}
+                        </div>
+                        <button onClick={this.submit.bind(this)}>Submit</button>
                     </div>
-                    
-                    <div style={EditorStyle}>
-                        <h2>Post Description</h2>
-                        <EditorComponent onChange={this.onDescriptionStateChange.bind(this)} editorState={this.state.descriptionEditorState}/>
-                    </div>
-                    <div style={EditorStyle}>
-                            <h2>Post Body</h2>
-                            {editor}
-                    </div>
-                    <button onClick={this.submit.bind(this)}>Submit</button>
                 </div>
             )
         }

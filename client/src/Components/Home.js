@@ -13,7 +13,7 @@ class Home extends React.Component{
         posts: []
     }
     componentDidMount(){
-        axios.get('/api/Blog')
+        axios.get('/api/Posts')
         .then((res)=>{
             // console.log("res: ", res)
             this.setState({
