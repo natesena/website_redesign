@@ -27,7 +27,7 @@ const errorStyle = {
 
 const InputStyle = {
     border: "none",
-    margin: "20px 0 20px 0",
+    margin: "10px 0 10px 0",
     borderBottom: "1px solid black",
 
 }
@@ -52,6 +52,7 @@ class Upload extends React.Component{
         descriptionEditorState: EditorState.createEmpty(),
         type: 'WebDevelopment',
         editorState: EditorState.createEmpty(),
+        buttons: [{title: '', url: ''}],
         redirectToNewPage: false
     }
     // THis function will be used to determine if we are editing an old post or making a new one
@@ -116,6 +117,7 @@ class Upload extends React.Component{
           editorState
         })
     }
+   
     validateForm(){
         if(this.state.title === ''){
             this.throwFormError("Error: Missing Title")
@@ -145,6 +147,28 @@ class Upload extends React.Component{
         this.setState({
             errors: []
         })
+    }
+    addLinkButton(){
+        // console.log('link button added')
+        this.setState({
+            buttons: [...this.state.buttons, {title: '', url: ''}]
+        })
+    }
+    linkChange(evt, index){
+        // console.log("name: ", evt.target.name)
+        // console.log("value: ", evt.target.value)
+        // console.log("index:", index)
+        const buttons = this.state.buttons
+        if(evt.target.name === 'title'){
+            buttons[index].title = evt.target.value
+        }
+        else{
+            buttons[index].url = evt.target.value
+        }
+        this.setState({
+            buttons: buttons
+        })
+    //     console.log("linkchange")
     }
     // get the JSON object and send it post body
     //I would like to send myself an email of the post
@@ -231,6 +255,16 @@ class Upload extends React.Component{
                                     <option value="Ideas">Ideas</option>
                                 </select>
                             </div>
+                            {this.state.buttons.map((button, index)=>{
+                                return(
+                                    <div key={index} >
+                                        <input index={index} name={"title"} value={this.state.buttons[index].title} placeholder={"title"}onChange={(evt) => this.linkChange(evt, index)}></input>
+                                        <input index={index} name={"url"} value={this.state.buttons[index].url} placeholder={"link url"}onChange={(evt) => this.linkChange(evt, index)}></input>
+                                    </div>
+                                )
+                            })}
+                            <button onClick={this.addLinkButton.bind(this)}>Add a link button</button>
+                            
                         </div>
                         
                         <div style={EditorStyle}>

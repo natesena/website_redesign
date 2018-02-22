@@ -15,7 +15,7 @@ class AframePost extends React.Component{
     render(){
         return(
             <a-entity>
-                <a-text value={`${this.props.index}`} color="#FFAABB" position={this.props.position} rotation={this.props.rotation}></a-text>
+                <a-text value={`${this.props.title}`} color="#000000" position={this.props.position} rotation={this.props.rotation}></a-text>
                 <a-plane height="2" width="2" color="#CCBBAA" position={this.props.position} rotation={this.props.rotation}></a-plane>
                 <a-plane height="2" width="2" color="#CCBBAA" position={this.props.position} rotation={this.reverseRotation(this.props.rotation)}></a-plane>
             </a-entity>
