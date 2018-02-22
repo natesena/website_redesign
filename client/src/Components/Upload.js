@@ -83,6 +83,7 @@ class Upload extends React.Component{
                     id: res.data.Post._id,
                     title: res.data.Post.title,
                     type: res.data.Post.type,
+                    buttons: res.data.Post.buttonLinks,
                     descriptionEditorState: EditorState.createWithContent(convertFromRaw(JSON.parse(res.data.Post.description))) ,
                     editorState: EditorState.createWithContent(convertFromRaw(JSON.parse(res.data.Post.body))) 
                 })
@@ -241,7 +242,7 @@ class Upload extends React.Component{
                         <h1>Upload Here</h1>
                         <div>
                             <h3>Post Preview</h3>
-                            <Post format={"many"}title={this.state.title} description={convertToRaw(this.state.descriptionEditorState.getCurrentContent())} body={{}} descriptionVisible={true} bodyVisible={false} controls={false}/>
+                            <Post format={"many"} title={this.state.title} buttons={this.state.buttons} description={convertToRaw(this.state.descriptionEditorState.getCurrentContent())} body={{}} descriptionVisible={true} bodyVisible={false} controls={false}/>
                         </div>
                         <div >
                             <div className="center">
