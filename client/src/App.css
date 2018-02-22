@@ -1,7 +1,14 @@
+/* General App CSS */
 .App{
   position: relative;
   margin: 0;
   padding: 0;
+}
+.App-Body{
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  width: 100%
 }
 body  {
   font-family: 'Roboto', sans-serif;
@@ -20,9 +27,17 @@ body  {
   display: inline-block;
   vertical-align: top
 }
+.zero-margin{
+  margin: 0
+}
+.full-width{
+  width: 100%
+}
 div{
   margin: 0;
 }
+/* End General App CSS */
+/* 2D Post CSS */
 .post{
   margin: 50px 0;
   -webkit-transition-duration: 0.3s;
@@ -30,10 +45,23 @@ div{
   -webkit-transition-property: transform;
   transition-property: transform;
 }
+.post-button-inputs{
+  margin: 5px 0 5px 0
+}
 .post:hover, .post:focus, .post:active {
   -webkit-transform: translateX(8px);
   transform: translateX(8px);
 }
+.post-link{
+  margin: 20px 0;
+  text-decoration: none;
+  color: white;
+  background-color: black;
+  border: 1px solid #222;
+  border-radius: 25%;
+  padding: 5px;
+}
+/* End 2d Post CSS */
 h1,h2, p, a{
   margin: 0;
   padding: 0
@@ -54,12 +82,7 @@ h1,h2, p, a{
   color: white;
   padding: 20px
 }
-.App-Body{
-  position: absolute;
-  z-index: 1;
-  top: 0;
-  width: 100%
-}
+
 .NavBar .fa{
   display: none
 }

@@ -187,6 +187,7 @@ class Upload extends React.Component{
                 title: this.state.title,
                 description: JSON.stringify(descriptionJSONData),
                 type: this.state.type,
+                buttonLinks: this.state.buttons,
                 body: JSON.stringify(bodyJSONData)
             }
             let id = this.props.getId()
@@ -257,9 +258,13 @@ class Upload extends React.Component{
                             </div>
                             {this.state.buttons.map((button, index)=>{
                                 return(
-                                    <div key={index} >
-                                        <input index={index} name={"title"} value={this.state.buttons[index].title} placeholder={"title"}onChange={(evt) => this.linkChange(evt, index)}></input>
-                                        <input index={index} name={"url"} value={this.state.buttons[index].url} placeholder={"link url"}onChange={(evt) => this.linkChange(evt, index)}></input>
+                                    <div className="row post-button-inputs" key={index} >
+                                        <div className="column-half ">
+                                            <input className="zero-margin full-width" index={index} name={"title"} value={this.state.buttons[index].title} placeholder={"title"}onChange={(evt) => this.linkChange(evt, index)}></input>
+                                        </div>
+                                        <div className="column-half">
+                                            <input className="zero-margin full-width" index={index} name={"url"} value={this.state.buttons[index].url} placeholder={"link url"}onChange={(evt) => this.linkChange(evt, index)}></input>
+                                        </div>
                                     </div>
                                 )
                             })}

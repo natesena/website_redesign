@@ -6,6 +6,12 @@ PostSchema = new Mongoose.Schema({
     description: {type: Object, required: true},
     date: {type: Date, default: Date.now},
     type: {type: String, required: true},
+    buttonLinks: [
+        {
+            title: {type: String},
+            url: {type: String}
+        }
+    ],
     body: {type: Object}
 })
 

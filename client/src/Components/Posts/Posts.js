@@ -97,6 +97,15 @@ class Post extends React.Component{
                 <a style={aStyle} href={`/${this.props.type}/${this.props.id}`}>{titleStyle}</a>
                 {blogDescription}
                 {blogBody}
+                <div className="post-button-container">
+                {this.props.buttons.map((button)=>{
+                        return(
+                            
+                                <a key={button._id} className="post-link" href={button.url}>{button.title}</a>
+                            
+                        )
+                    })}
+                </div>
                 <div style={shareStyle}>
                     <i onClick={this.copyLink.bind(this)} className="fa fa-link"></i>
                 </div>
