@@ -75,6 +75,22 @@ div{
   -webkit-transform: translateX(8px);
   transform: translateX(8px);
 }
+.share-button{
+  color: white;
+  background-color: blue;
+  border: 1px solid transparent;
+  padding: 5px;
+  border-radius: 50%;
+  -webkit-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  -webkit-transition-property: background-color;
+  transition-property: background-color;
+}
+.share-button:hover{
+  color: blue;
+  background: transparent;
+  border: 1px solid blue
+}
 /* End 2d Post CSS */
 h1,h2, p, a{
   margin: 0;

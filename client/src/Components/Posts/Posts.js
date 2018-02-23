@@ -21,7 +21,9 @@ const editStyle = {
 const postControlStyle = {
     textAlign: 'right'
 }
-const shareStyle={
+
+const shareDivStyle={
+    cursor: 'pointer',
     textAlign: 'right'
 }
 const blogBodyStyle = {
@@ -106,8 +108,8 @@ class Post extends React.Component{
                         )
                     })}
                 </div>
-                <div style={shareStyle}>
-                    <i onClick={this.copyLink.bind(this)} className="fa fa-link"></i>
+                <div style={shareDivStyle}>
+                    <i className="fa fa-link share-button" onClick={this.copyLink.bind(this)}></i>
                 </div>
                 {controls}
                 <p>Let's include a link button to copy the link :)</p>
