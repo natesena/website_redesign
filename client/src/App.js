@@ -8,6 +8,7 @@ import ProductDesign from './Components/ProductDesign.js'
 import Upload from './Components/Upload.js'
 import Blog from './Components/Blog.js'
 import Ideas from './Components/Ideas.js'
+import Login from './Components/Login.js'
 
 
 
@@ -32,6 +33,9 @@ class App extends Component {
           <Switch>
             <Route exact path="/" render={(props)=>{
               return <Home/>
+            }} />
+            <Route exact path="/login" render={(props)=>{
+              return <Login/>
             }} />
             <Route path="/WebDevelopment" render={(props)=>{
               return <WebDevelopment  getId={this.getID}/>
