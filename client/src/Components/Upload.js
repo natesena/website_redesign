@@ -13,11 +13,17 @@ import draftToHtml from 'draftjs-to-html'
 import Post from "./Posts/Posts.js"
 import { Redirect } from 'react-router-dom'
 
-
+const postFormStyle = {
+    padding: "20px",
+    backgroundColor: "white",
+    borderRadius: "20px"
+}
 const EditorStyle = {
+    padding: "10px",
     marginTop: "10px",
-    border: "5px solid black",
-    
+    border: "none",
+    boxShadow: "1px 1px 3px rgba(0,0,0, 0.1)",
+    borderRadius: "10px"
 }
 
 const errorStyle = {
@@ -27,18 +33,23 @@ const errorStyle = {
 
 const InputStyle = {
     border: "none",
+    padding: "5px",
+    borderRadius: "5px",
     margin: "10px 0 10px 0",
-    borderBottom: "1px solid black",
-
+    boxShadow: "1px 1px 3px rgba(0,0,0, 0.1)"
 }
 
 const SelectStyle = {
+    width: "100%",
     margin: "10px 0 10px 0",
-    backgroundColor: "gray",
+    backgroundColor: "white",
     fontSize: "1.5em",
     padding: "5px",
-    clear: "both"
+    clear: "both",
+    boxShadow: "1px 1px 3px rgba(0,0,0, 0.1)"
 }
+
+
 
 
 class Upload extends React.Component{
@@ -239,49 +250,57 @@ class Upload extends React.Component{
                         {this.state.errors.map((error, num)=>{
                             return <p key="{num}" style={errorStyle}>{error}</p>
                         })}
-                        <h1>Upload Here</h1>
+                        <div className="text-center">
+                            <h1>Upload Here</h1>
+                        </div>
                         <div>
                             <h3>Post Preview</h3>
                             <Post format={"many"} title={this.state.title} buttons={this.state.buttons} description={convertToRaw(this.state.descriptionEditorState.getCurrentContent())} body={{}} descriptionVisible={true} bodyVisible={false} controls={false}/>
                         </div>
-                        <div >
-                            <div className="center">
-                                <input className="name-input" style={InputStyle} type='text' name='title' value={this.state.title} placeholder={"Name this post"} onChange={this.onChange.bind(this)}/>
-                            </div>
-                            <div className="center">
-                                <select id="select" style={SelectStyle} onChange={this.onSelectChange.bind(this)}>
-                                    <option value="" disabled defaultValue>Select Your Post Category</option>
-                                    <option value="WebDevelopment">Web Development</option>
-                                    <option value="ProductDesign">Product Design</option>
-                                    <option value="Blog">Blog</option>
-                                    <option value="Ideas">Ideas</option>
-                                </select>
-                            </div>
-                            {this.state.buttons.map((button, index)=>{
-                                return(
-                                    <div className="row post-button-inputs" key={index} >
-                                        <div className="column-half ">
-                                            <input className="zero-margin full-width" index={index} name={"title"} value={this.state.buttons[index].title} placeholder={"title"}onChange={(evt) => this.linkChange(evt, index)}></input>
+                        <div style={postFormStyle}>
+                            <div >
+                                <h3>Title</h3>
+                                <div className="center">
+                                    <input className="name-input" style={InputStyle} type='text' name='title' value={this.state.title} placeholder={"Name this post"} onChange={this.onChange.bind(this)}/>
+                                </div>
+                                <h3>Post Category</h3>
+                                <div className="center">
+                                    <select id="select" style={SelectStyle} onChange={this.onSelectChange.bind(this)}>
+                                        <option value="" disabled defaultValue>Select Your Post Category</option>
+                                        <option value="WebDevelopment">Web Development</option>
+                                        <option value="ProductDesign">Product Design</option>
+                                        <option value="Blog">Blog</option>
+                                        <option value="Ideas">Ideas</option>
+                                    </select>
+                                </div>
+                                {this.state.buttons.map((button, index)=>{
+                                    return(
+                                        <div className="row post-button-inputs" key={index} >
+                                            <div className="column-half ">
+                                                <input className="zero-margin full-width" index={index} name={"title"} value={this.state.buttons[index].title} placeholder={"title"}onChange={(evt) => this.linkChange(evt, index)}></input>
+                                            </div>
+                                            <div className="column-half">
+                                                <input className="zero-margin full-width" index={index} name={"url"} value={this.state.buttons[index].url} placeholder={"link url"}onChange={(evt) => this.linkChange(evt, index)}></input>
+                                            </div>
                                         </div>
-                                        <div className="column-half">
-                                            <input className="zero-margin full-width" index={index} name={"url"} value={this.state.buttons[index].url} placeholder={"link url"}onChange={(evt) => this.linkChange(evt, index)}></input>
-                                        </div>
-                                    </div>
-                                )
-                            })}
-                            <button onClick={this.addLinkButton.bind(this)}>Add a link button</button>
+                                    )
+                                })}
+                                <button className="upload-button" onClick={this.addLinkButton.bind(this)}>Add a Link To Post</button>
+                                
+                            </div>
                             
+                            <div style={EditorStyle}>
+                                <h2>Post Description</h2>
+                                <EditorComponent onChange={this.onDescriptionStateChange.bind(this)} editorState={this.state.descriptionEditorState}/>
+                            </div>
+                            <div style={EditorStyle}>
+                                    <h2>Post Body</h2>
+                                    {editor}
+                            </div>
+                            <div className="text-center">
+                                <button className="upload-button" onClick={this.submit.bind(this)}>Submit</button>
+                            </div>
                         </div>
-                        
-                        <div style={EditorStyle}>
-                            <h2>Post Description</h2>
-                            <EditorComponent onChange={this.onDescriptionStateChange.bind(this)} editorState={this.state.descriptionEditorState}/>
-                        </div>
-                        <div style={EditorStyle}>
-                                <h2>Post Body</h2>
-                                {editor}
-                        </div>
-                        <button onClick={this.submit.bind(this)}>Submit</button>
                     </div>
                 </div>
             )
