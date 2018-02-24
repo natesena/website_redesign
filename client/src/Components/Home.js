@@ -31,11 +31,13 @@ class Home extends React.Component{
                     <AframeHome posts={this.state.posts}/>
                 </div>
                 <div className="body-container">
-                <h1>This is the home</h1>
-                <p>I want to have an animation that zooms in on each post in hover</p>
-                {this.state.posts.map((post)=>{
-                    return <Post key={post._id} onDelete={this.hideDeletedPost.bind(this)} home={true} format={"many"} type={post.type} id={post._id} title={post.title} buttons={post.buttonLinks} description={JSON.parse(post.description)} bodyVisible={false} descriptionVisible={true} controls={true}/>
-                })}
+                    <div className="text-center">
+                        <h1>This is the home</h1>
+                        <p>I want to have an animation that zooms in on each post in hover</p>
+                    </div>
+                    {this.state.posts.map((post)=>{
+                        return <Post key={post._id} onDelete={this.hideDeletedPost.bind(this)} home={true} format={"many"} type={post.type} id={post._id} title={post.title} buttons={post.buttonLinks} description={JSON.parse(post.description)} bodyVisible={false} descriptionVisible={true} controls={true}/>
+                    })}
                 </div>
             </div>
         )

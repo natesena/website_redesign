@@ -7,25 +7,20 @@ import {Redirect} from 'react-router-dom'
 
 const containerStyle = {
     boxShadow: '0px 3px 3px rgba(10, 10, 10, .2)',
-    padding: '10px'
+    padding: '15px'
 }
 
 const aStyle = {
     textDecoration: "none",
-    margin: "10px"
-}
-const editStyle = {
-    margin: "2px",
-    verticalAlign: "middle"
-}
-const postControlStyle = {
-    textAlign: 'right'
 }
 
-const shareDivStyle={
+const postControlStyle = {
+    display: "inline-block",
     cursor: 'pointer',
-    textAlign: 'right'
+    float: "right",
+    margin: "0 2px"
 }
+
 const blogBodyStyle = {
     padding: '10px',
     margin: "10px 0"
@@ -71,9 +66,13 @@ class Post extends React.Component{
             </div>
         }  
         if(this.props.controls){
-            controls =  <div style={postControlStyle}>
-                            <a style={editStyle} href={`/Edit/${this.props.id}`}><i className="fa fa-edit"></i></a>
-                            <a style={editStyle} href="#trash" onClick={this.deletePost.bind(this)}><i className="fa fa-trash"></i></a> 
+            controls =  <div className="inline-block float-right">
+                            <div style={postControlStyle}>
+                                <a href={`/Edit/${this.props.id}`}><i className="fa fa-edit post-control-button"></i></a>
+                            </div>
+                            <div style={postControlStyle}>
+                                <a href="#trash" onClick={this.deletePost.bind(this)}><i className="fa fa-trash post-control-button"></i></a> 
+                            </div>
                         </div>
         }
         if(this.props.descriptionVisible){
@@ -99,20 +98,22 @@ class Post extends React.Component{
                 <a style={aStyle} href={`/${this.props.type}/${this.props.id}`}>{titleStyle}</a>
                 {blogDescription}
                 {blogBody}
-                <div className="post-button-container">
-                {this.props.buttons.map((button)=>{
-                        return(
-                            <div key={button._id} className="post-link-container">
-                                <a  className="post-link" href={button.url}>{`${button.title} `}<i className="fa fa-angle-right"></i></a>
-                            </div>
-                        )
-                    })}
+                <div className="row post-user-buttons">
+                    <div className="post-button-container">
+                        {this.props.buttons.map((button)=>{
+                                return(
+                                    <div key={button._id} className="post-link-container">
+                                        <a  className="post-link" href={button.url}>{` ${button.title}  `}<i className="fa fa-angle-right"></i></a>
+                                    </div>
+                                )
+                            })}
+                    </div>
+                    <div style={postControlStyle}>
+                        <i className="fa fa-link post-control-button" onClick={this.copyLink.bind(this)}></i>
+                    </div>
+                    {controls}
                 </div>
-                <div style={shareDivStyle}>
-                    <i className="fa fa-link share-button" onClick={this.copyLink.bind(this)}></i>
-                </div>
-                {controls}
-                <p>Let's include a link button to copy the link :)</p>
+                
             </div>
         )
     }
