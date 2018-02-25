@@ -89,7 +89,9 @@ h1,h2, p, a{
   -webkit-transform: translateX(8px);
   transform: translateX(8px);
 }
-
+.post-title{
+  margin-bottom: 10px;
+}
 .post-button-container{
   display: inline-block;
 }

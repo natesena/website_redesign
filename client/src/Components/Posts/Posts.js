@@ -95,7 +95,9 @@ class Post extends React.Component{
         }
         return(
             <div className={divClass} style={divStyle}>
-                <a style={aStyle} href={`/${this.props.type}/${this.props.id}`}>{titleStyle}</a>
+                <div className="post-title">
+                    <a style={aStyle} href={`/${this.props.type}/${this.props.id}`}>{titleStyle}</a>
+                </div>
                 {blogDescription}
                 {blogBody}
                 <div className="row post-user-buttons">
