@@ -31,8 +31,8 @@ class Home extends React.Component{
                     <AframeHome posts={this.state.posts}/>
                 </div>
                 <div className="body-container">
-                    <div className="text-center">
-                        <h1 className="title">This is the home</h1>
+                    <div className="text-center title-wrapper">
+                        <h1 className="title">THIS IS THE HOME</h1>
                         <p>I want to have an animation that zooms in on each post in hover</p>
                     </div>
                     {this.state.posts.map((post)=>{

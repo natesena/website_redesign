@@ -7,16 +7,14 @@
 .App-Body{
   position: absolute;
   background: rgb(51, 190, 255);  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #C4E0E5, rgb(51, 190, 255));  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #C4E0E5, rgb(51, 190, 255)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-
+  background: -webkit-linear-gradient(to right, #C4E0E5, rgb(51, 190, 255));  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #C4E0E5, rgb(51, 190, 255)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   z-index: 1;
   top: 0;
   width: 100%
 }
 body  {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 i{
   width: 15px;
@@ -39,7 +37,13 @@ i{
 }
 .title{
   font-family: 'Palanquin Dark', sans-serif;
-  color: rgb(252, 70, 14)
+  font-size: 50px;
+  color: rgb(51, 190, 255);
+  -webkit-text-stroke: 1px rgb(252, 70, 14);
+  text-shadow: 2px  0 0 rgb(252, 70, 14);
+}
+.title-wrapper{
+  margin-bottom: 50px 
 }
 .inline-block{
   display: inline-block
@@ -60,6 +64,9 @@ h1,h2, p, a{
   color: black;
   margin: 0;
   padding: 0
+}
+p{
+  font-weight: normal
 }
 .post h2{
   -webkit-transition-duration: 0.3s;
