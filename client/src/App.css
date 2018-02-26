@@ -6,9 +6,9 @@
 }
 .App-Body{
   position: absolute;
-  background: #4CA1AF;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #C4E0E5, #BBE0FF);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #C4E0E5, #BBE0FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: rgb(51, 190, 255);  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #C4E0E5, rgb(51, 190, 255));  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #C4E0E5, rgb(51, 190, 255)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
 
   z-index: 1;
@@ -17,6 +17,11 @@ background: linear-gradient(to right, #C4E0E5, #BBE0FF); /* W3C, IE 10+/ Edge, F
 }
 body  {
   font-family: 'Roboto', sans-serif;
+}
+i{
+  width: 15px;
+  height: 15px;
+  margin: 0 auto
 }
 .body-drop{
   margin-top: 100px
@@ -32,7 +37,10 @@ body  {
   display: inline-block;
   vertical-align: top
 }
-
+.title{
+  font-family: 'Palanquin Dark', sans-serif;
+  color: rgb(252, 70, 14)
+}
 .inline-block{
   display: inline-block
 }
@@ -96,6 +104,7 @@ h1,h2, p, a{
   display: inline-block;
 }
 .post-user-buttons{
+  text-align: center;
   margin: 10px 0
 }
 

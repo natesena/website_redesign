@@ -6,7 +6,7 @@ import 'font-awesome/css/font-awesome.min.css'
 import {Redirect} from 'react-router-dom'
 
 const containerStyle = {
-    boxShadow: '0px 3px 3px rgba(10, 10, 10, .2)',
+    boxShadow: '3px 3px 3px 1px rgba(10, 10, 10, .2)',
     padding: '15px'
 }
 

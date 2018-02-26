@@ -32,7 +32,7 @@ class Home extends React.Component{
                 </div>
                 <div className="body-container">
                     <div className="text-center">
-                        <h1>This is the home</h1>
+                        <h1 className="title">This is the home</h1>
                         <p>I want to have an animation that zooms in on each post in hover</p>
                     </div>
                     {this.state.posts.map((post)=>{
