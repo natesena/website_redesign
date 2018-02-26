@@ -19,7 +19,7 @@ body  {
 i{
   width: 15px;
   height: 15px;
-  margin: 0 auto
+  margin: 0 auto;
 }
 .body-drop{
   margin-top: 100px
@@ -37,10 +37,16 @@ i{
 }
 .title{
   font-family: 'Palanquin Dark', sans-serif;
-  font-size: 50px;
-  color: rgb(51, 190, 255);
-  -webkit-text-stroke: 1px rgb(252, 70, 14);
-  text-shadow: 2px  0 0 rgb(252, 70, 14);
+  font-size: 60px;
+  color: white;
+  text-shadow:1px 0 0 rgb(51, 190, 255), 4px  0 0 rgb(252, 70, 14), 0 0 3px white, 4px 0 1px white;
+  -webkit-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  -webkit-transition-property: text-shadow;
+  transition-property: text-shadow;
+}
+.title:hover{
+  text-shadow: 1px 0 0 rgb(51, 190, 255), 3px  2px 0 rgb(252, 70, 14), 0 0 3px white, 3px 2px 1px white;
 }
 .title-wrapper{
   margin-bottom: 50px 
@@ -68,15 +74,7 @@ h1,h2, p, a{
 p{
   font-weight: normal
 }
-.post h2{
-  -webkit-transition-duration: 0.3s;
-  transition-duration: 0.3s;
-  -webkit-transition-property: color;
-  transition-property: color;
-}
-.post h2:hover{
-  color:blue;
-}
+
 .aframe{
   height: 300px;
 }
@@ -104,8 +102,25 @@ p{
   -webkit-transform: translateX(8px);
   transform: translateX(8px);
 }
-.post-title{
+.post h2{
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: color;
+  transition-property: color;
+}
+.post h2:hover{
+  color:blue;
+}
+.post-title-container{
   margin-bottom: 10px;
+}
+.post-title{
+  font-family: 'Roboto', sans-serif;
+  
+  text-decoration: none;
+}
+.post-title h2{
+  color: rgb(252, 70, 14);
 }
 .post-button-container{
   display: inline-block;
@@ -117,6 +132,7 @@ p{
 
 .post-link{
   text-decoration: none;
+  font-size: .75em;
   color: white;
 }
 .post-link-container{

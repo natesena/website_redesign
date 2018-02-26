@@ -7,11 +7,7 @@ import {Redirect} from 'react-router-dom'
 
 const containerStyle = {
     boxShadow: '3px 3px 3px 1px rgba(10, 10, 10, .2)',
-    padding: '15px'
-}
-
-const aStyle = {
-    textDecoration: "none",
+    padding: '25px 25px 15px 25px'
 }
 
 const postControlStyle = {
@@ -95,8 +91,8 @@ class Post extends React.Component{
         }
         return(
             <div className={divClass} style={divStyle}>
-                <div className="post-title">
-                    <a style={aStyle} href={`/${this.props.type}/${this.props.id}`}>{titleStyle}</a>
+                <div className="post-title-container">
+                    <a className="post-title" href={`/${this.props.type}/${this.props.id}`}>{titleStyle}</a>
                 </div>
                 {blogDescription}
                 {blogBody}
