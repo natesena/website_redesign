@@ -44,8 +44,8 @@ class Blog extends React.Component{
         let bodyVisibility = false
         let descriptionVisiblity = true
         let controlsVisibility = false
-        let title = <div>
-                        <h1>Blog</h1>
+        let title = <div className="text-center">
+                        <h1 className="title">Blog</h1>
                         <p>I want to do pagination on this page and should look up if there is a best practice</p>
                     </div>
         if(this.state.id){

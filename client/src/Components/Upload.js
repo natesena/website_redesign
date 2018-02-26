@@ -251,7 +251,7 @@ class Upload extends React.Component{
                             return <p key="{num}" style={errorStyle}>{error}</p>
                         })}
                         <div className="text-center">
-                            <h1>Upload Here</h1>
+                            <h1 className="title">Upload Here</h1>
                         </div>
                         <div>
                             <h3>Post Preview</h3>
