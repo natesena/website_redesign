@@ -17,11 +17,24 @@ const postControlStyle = {
     margin: "0 2px"
 }
 
-const blogBodyStyle = {
+const singleBlogBodyStyle = {
     padding: '10px',
-    margin: "10px 0"
+    margin: "10px 0",
+    backgroundColor: "rgba(255,255,255,0.2)",
+    borderRadius: "30px"
+
+}
+const manyBlogBodyStyle = {
+    padding: '10px',
+    margin: "10px 0",
 }
 
+const fullPageTitleContainerStyle = {
+    marginTop: "100px"
+}
+const manyTitleContainerStyle = {
+    marginBottom: "10px"
+}
 
 class Post extends React.Component{
     state={
@@ -29,8 +42,16 @@ class Post extends React.Component{
         redirect:false
     }
     componentDidMount(){
-        // console.log("post props: ", this.props)
-        
+        if(this.props.format === "single"){
+            let appBodyEl = document.querySelector(".App-Body")
+            let bodyDropEl = document.querySelector(".body-drop")
+            let postBodyEl = document.querySelector(".post-body")
+            let postButtonsEl = document.querySelector(".post-user-buttons")
+            // post-user-buttons
+            console.log(postButtonsEl.clientHeight)
+            postBodyEl.style.height = (window.innerHeight - (postButtonsEl.clientHeight + bodyDropEl.clientHeight)) + "px"
+        }
+        //
         this.setState({
             home: this.props.home
         })
@@ -50,13 +71,18 @@ class Post extends React.Component{
         console.log("i wish this copied")
     }
     render(){
-        let divClass = null //-------------
+        let divClass = "full-page-post" //-------------
         let divStyle = null
-        let titleStyle = <h1>{this.props.title}</h1>
+        let titleContainerStyle = fullPageTitleContainerStyle
+        let titleStyle = <h1 className="full-page-post-title">{this.props.title}</h1>
         let controls = null
         let blogBody = null
+        let blogBodyStyle = manyBlogBodyStyle
         let blogDescription = null
         if(this.props.bodyVisible){
+            if(this.props.format === "single"){
+                blogBodyStyle = singleBlogBodyStyle
+            }
             blogBody = <div style={blogBodyStyle}>
             {ReactHtmlParser(draftToHtml(this.props.body))}
             </div>
@@ -78,6 +104,7 @@ class Post extends React.Component{
         }
         if(this.props.format === "many"){
             //have totally different appearance
+            titleContainerStyle = manyTitleContainerStyle
             divClass = "post"
             divStyle = containerStyle
             titleStyle = <h2>{this.props.title}</h2>
@@ -91,11 +118,13 @@ class Post extends React.Component{
         }
         return(
             <div className={divClass} style={divStyle}>
-                <div className="post-title-container">
-                    <a className="post-title" href={`/${this.props.type}/${this.props.id}`}>{titleStyle}</a>
+                <div className="post-body">
+                    <div className="post-title-container" style={titleContainerStyle}>
+                        <a className="post-title" href={`/${this.props.type}/${this.props.id}`}>{titleStyle}</a>
+                    </div>
+                    {blogDescription}
+                    {blogBody}
                 </div>
-                {blogDescription}
-                {blogBody}
                 <div className="row post-user-buttons">
                     <div className="post-button-container">
                         {this.props.buttons.map((button)=>{

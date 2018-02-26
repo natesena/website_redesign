@@ -7,6 +7,7 @@ class Blog extends React.Component{
         id: '',//oly used if there is a single post
         posts:[]
     }
+    //getOneBlogPost hits a different route to only return one post
     getOneBlogPost(id){
         axios.get('/api/Posts/' + id)
         .then((res)=>{
@@ -17,6 +18,7 @@ class Blog extends React.Component{
             })
         })
     }
+    //getAllPosts hits a route to deliver all posts
     getAllBlogPosts(){
         axios.get('/api/Posts/', {params:{type: "Blog"}})
         .then((res)=>{
@@ -26,6 +28,7 @@ class Blog extends React.Component{
             })
         })
     }
+    //if there is an id in the url get one post otherwise all posts
     componentDidMount(){
         let id = this.props.getId()
         // console.log(id)
@@ -53,6 +56,7 @@ class Blog extends React.Component{
             title = null
         }
         return(
+            //dependent on the format of the post make it look differently
             <div className="body-drop">
                 <div className="body-container">
                     {title}

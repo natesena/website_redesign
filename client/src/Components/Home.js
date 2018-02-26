@@ -33,7 +33,6 @@ class Home extends React.Component{
                 <div className="body-container">
                     <div className="text-center title-wrapper">
                         <h1 className="title">THIS IS THE HOME</h1>
-                        <p>I want to have an animation that zooms in on each post in hover</p>
                     </div>
                     {this.state.posts.map((post)=>{
                         return <Post key={post._id} onDelete={this.hideDeletedPost.bind(this)} home={true} format={"many"} type={post.type} id={post._id} title={post.title} buttons={post.buttonLinks} description={JSON.parse(post.description)} bodyVisible={false} descriptionVisible={true} controls={true}/>
