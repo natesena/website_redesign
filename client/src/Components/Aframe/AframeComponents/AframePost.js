@@ -12,10 +12,19 @@ class AframePost extends React.Component{
         // console.log(`returnCoordinates ${this.props.index}: `, returnCoordinates)
         return returnCoordinates
     }
+    formatPosition(x,y,z, positionString){
+        // console.log("pos: ", positionString)
+        var coordinates = positionString.split(' ')
+        coordinates[0] = Number(coordinates[0]) + x
+        coordinates[1] = Number(coordinates[1]) + y
+        coordinates[2] = Number(coordinates[2]) + z
+        // console.log("coordinates: ", coordinates)
+        return coordinates.join(" ")
+    }
     render(){
         return(
             <a-entity>
-                <a-text value={`${this.props.title}`} color="#000000" position={this.props.position} rotation={this.props.rotation}></a-text>
+                <a-text value={`${this.props.title}`} color="#000000" align="center" width="2" position={this.formatPosition(0, 0.9, 0,this.props.position)} rotation={this.props.rotation}></a-text>
                 <a-plane height="2" width="2" color="#CCBBAA" position={this.props.position} rotation={this.props.rotation}></a-plane>
                 <a-plane height="2" width="2" color="#CCBBAA" position={this.props.position} rotation={this.reverseRotation(this.props.rotation)}></a-plane>
             </a-entity>

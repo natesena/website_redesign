@@ -9,7 +9,7 @@ class AframeHome extends React.Component{
     }
     //calculatePosition returns the location of where an aframe post should be.
     calculatePosition(index, length, rad, wid){
-        console.log('calc pos: ', index, length, rad, wid)
+        // console.log('calc pos: ', index, length, rad, wid)
         var angleBetweenPosts = 360/length
         angleBetweenPosts = (Math.PI/180) * angleBetweenPosts
         //calculate equidistance given that radius
@@ -17,12 +17,12 @@ class AframeHome extends React.Component{
         var zCoordinate = -(rad * Math.cos(index*angleBetweenPosts))
         //if not enough room between posts, increase the radius
         var coordinates = `${xCoordinate} 1 ${zCoordinate}`
-        console.log(`coordinates of ${index}: `,coordinates)
+        // console.log(`coordinates of ${index}: `,coordinates)
         return coordinates 
     }
     calculateRotation(index,length){
         var yAxisRotation = (360/length) * index
-        console.log(`homescene calculated rotation of ${index}: `, yAxisRotation)
+        // console.log(`homescene calculated rotation of ${index}: `, yAxisRotation)
         return `0 ${-yAxisRotation} 0`
     }
     render(){
