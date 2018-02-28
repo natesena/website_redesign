@@ -103,7 +103,9 @@ class Upload extends React.Component{
                     type: res.data.Post.type,
                     buttons: res.data.Post.buttonLinks,
                     descriptionEditorState: EditorState.createWithContent(convertFromRaw(JSON.parse(res.data.Post.description))) ,
-                    editorState: EditorState.createWithContent(convertFromRaw(JSON.parse(res.data.Post.body))) 
+                    editorState: EditorState.createWithContent(convertFromRaw(JSON.parse(res.data.Post.body))),
+                    aframeBody: res.data.Post.aframeBody,
+                    aframeDescription: res.data.Post.aframeDescription 
                 })
             })
         }
@@ -303,6 +305,7 @@ class Upload extends React.Component{
                                 <EditorComponent onChange={this.onDescriptionStateChange.bind(this)} editorState={this.state.descriptionEditorState}/>
                             </div>
                             <div style={EditorStyle}>
+                                <h2>Aframe Description</h2>
                                 <textarea style={textAreaStyle} name="aframeDescription" value={this.state.aframeDescription} onChange={this.onChange.bind(this)}placeholder="Aframe Description Here"></textarea>
                             </div>
                             <div style={EditorStyle}>
@@ -310,6 +313,7 @@ class Upload extends React.Component{
                                     {editor}
                             </div>
                             <div style={EditorStyle}>
+                            <h2>Aframe Body</h2>
                                 <textarea style={textAreaStyle} name="aframeBody" value={this.state.aframeBody} onChange={this.onChange.bind(this)} placeholder="Aframe Body Here"></textarea>
                             </div>
                             <div className="text-center">
