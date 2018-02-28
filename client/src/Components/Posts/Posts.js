@@ -58,7 +58,7 @@ class Post extends React.Component{
     }
     deletePost(){
         console.log("does post know home is: ", this.state.home)
-        axios.delete('/api/Blog/' + this.props.id)
+        axios.delete('/api/Posts/' + this.props.id)
         .then((res)=>{
             this.setState({
                 redirect: true

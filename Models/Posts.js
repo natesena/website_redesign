@@ -12,7 +12,9 @@ PostSchema = new Mongoose.Schema({
             url: {type: String}
         }
     ],
-    body: {type: Object}
+    body: {type: Object},
+    aframeDescription: {type: String, required: true},
+    aframeBody: {type: String, required: true}
 })
 
 

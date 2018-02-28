@@ -49,6 +49,11 @@ const SelectStyle = {
     boxShadow: "1px 1px 3px rgba(0,0,0, 0.1)"
 }
 
+const textAreaStyle ={
+    border: "none",
+    width: "100%"
+}
+
 
 
 
@@ -61,8 +66,10 @@ class Upload extends React.Component{
         emptyDescription: '',
         title: '',
         descriptionEditorState: EditorState.createEmpty(),
+        aframeDescription: '',
         type: 'WebDevelopment',
         editorState: EditorState.createEmpty(),
+        aframeBody: '',
         buttons: [{title: '', url: ''}],
         redirectToNewPage: false
     }
@@ -200,7 +207,9 @@ class Upload extends React.Component{
                 description: JSON.stringify(descriptionJSONData),
                 type: this.state.type,
                 buttonLinks: this.state.buttons,
-                body: JSON.stringify(bodyJSONData)
+                body: JSON.stringify(bodyJSONData),
+                aframeDescription: this.state.aframeDescription,
+                aframeBody: this.state.aframeBody
             }
             let id = this.props.getId()
             console.log("submit id: ", id)
@@ -294,8 +303,14 @@ class Upload extends React.Component{
                                 <EditorComponent onChange={this.onDescriptionStateChange.bind(this)} editorState={this.state.descriptionEditorState}/>
                             </div>
                             <div style={EditorStyle}>
+                                <textarea style={textAreaStyle} name="aframeDescription" value={this.state.aframeDescription} onChange={this.onChange.bind(this)}placeholder="Aframe Description Here"></textarea>
+                            </div>
+                            <div style={EditorStyle}>
                                     <h2>Post Body</h2>
                                     {editor}
+                            </div>
+                            <div style={EditorStyle}>
+                                <textarea style={textAreaStyle} name="aframeBody" value={this.state.aframeBody} onChange={this.onChange.bind(this)} placeholder="Aframe Body Here"></textarea>
                             </div>
                             <div className="text-center">
                                 <button className="upload-button" onClick={this.submit.bind(this)}>Submit</button>
