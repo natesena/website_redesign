@@ -43,7 +43,7 @@ class Post extends React.Component{
     }
     componentDidMount(){
         if(this.props.format === "single"){
-            let appBodyEl = document.querySelector(".App-Body")
+            // let appBodyEl = document.querySelector(".App-Body")
             let bodyDropEl = document.querySelector(".body-drop")
             let postBodyEl = document.querySelector(".post-body")
             let postButtonsEl = document.querySelector(".post-user-buttons")

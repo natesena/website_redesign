@@ -12,6 +12,12 @@ PostSchema = new Mongoose.Schema({
             url: {type: String}
         }
     ],
+    aframePhotoLinks: [
+        {
+            url: {type:String},
+            featured: {type: Boolean}
+        }
+    ],
     body: {type: Object},
     aframeDescription: {type: String, required: true},
     aframeBody: {type: String, required: true}

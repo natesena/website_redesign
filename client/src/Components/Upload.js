@@ -54,6 +54,13 @@ const textAreaStyle ={
     width: "100%"
 }
 
+const aframeLinkStyle = {
+    width: "90%"
+}
+const aframeCheckStyle = {
+    width: "10%"
+}
+
 
 
 
@@ -71,6 +78,7 @@ class Upload extends React.Component{
         editorState: EditorState.createEmpty(),
         aframeBody: '',
         buttons: [{title: '', url: ''}],
+        aframePhotoLinks: [{url: "", featured: false}],
         redirectToNewPage: false
     }
     // THis function will be used to determine if we are editing an old post or making a new one
@@ -191,6 +199,20 @@ class Upload extends React.Component{
         })
     //     console.log("linkchange")
     }
+    aframeLinkChange(evt, index){
+        const links = this.state.aframePhotoLinks
+        if(evt.target.name === "aframeURL"){
+            links[index].url = evt.target.value
+        }
+        else{
+            console.log('checkbox val: ', evt.target.value)
+            links[index].featured = evt.target.value
+        }
+        this.setState({
+            aframePhotoLinks: links
+        })
+    }
+
     // get the JSON object and send it post body
     //I would like to send myself an email of the post
 
@@ -316,8 +338,19 @@ class Upload extends React.Component{
                             <h2>Aframe Body</h2>
                                 <textarea style={textAreaStyle} name="aframeBody" value={this.state.aframeBody} onChange={this.onChange.bind(this)} placeholder="Aframe Body Here"></textarea>
                             </div>
+                            <div>
+                                <h2>Aframe Photo Links</h2>
+                            {this.state.aframePhotoLinks.map((link, index)=>{
+                                return(
+                                    <div key={`aframePhotoLink-${index}`}>
+                                        <input name="aframeURL" style={aframeLinkStyle} value={this.state.aframePhotoLinks[index].url} placeholder="url" onChange={(evt)=>{this.aframeLinkChange(evt,index)}}></input>
+                                        <input name="aframeCheckBox" type="checkbox" value={this.state.aframePhotoLinks[index].featured} onChange={(evt)=>{this.aframeLinkChange(evt,index)}}></input>
+                                    </div>
+                                )
+                            })}
+                            </div>  
                             <div className="text-center">
-                                <button className="upload-button" onClick={this.submit.bind(this)}>Submit</button>
+                                <button style={aframeCheckStyle} className="upload-button" onClick={this.submit.bind(this)}>Submit</button>
                             </div>
                         </div>
                     </div>
