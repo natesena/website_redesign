@@ -113,7 +113,8 @@ class Upload extends React.Component{
                     descriptionEditorState: EditorState.createWithContent(convertFromRaw(JSON.parse(res.data.Post.description))) ,
                     editorState: EditorState.createWithContent(convertFromRaw(JSON.parse(res.data.Post.body))),
                     aframeBody: res.data.Post.aframeBody,
-                    aframeDescription: res.data.Post.aframeDescription 
+                    aframeDescription: res.data.Post.aframeDescription, 
+                    aframePhotoLinks: res.data.Post.aframePhotoLinks
                 })
             })
         }
@@ -210,11 +211,15 @@ class Upload extends React.Component{
             links[index].url = evt.target.value
         }
         else{
-            console.log('checkbox val: ', evt.target.value)
-            links[index].featured = evt.target.value
+           console.log(evt.target.name + " is " + evt.target.value)
+           let preValue = this.state.aframePhotoLinks[index].featured
+           links[index].featured = !preValue
         }
+        console.log("links:",links)
         this.setState({
             aframePhotoLinks: links
+        },()=>{
+            console.log(this.state)
         })
     }
 
@@ -238,10 +243,11 @@ class Upload extends React.Component{
                 buttonLinks: this.state.buttons,
                 body: JSON.stringify(bodyJSONData),
                 aframeDescription: this.state.aframeDescription,
-                aframeBody: this.state.aframeBody
+                aframeBody: this.state.aframeBody,
+                aframePhotoLinks: this.state.aframePhotoLinks
             }
             let id = this.props.getId()
-            console.log("submit id: ", id)
+            // console.log("submit id: ", id)
             if(id){
                 axios.patch('/api/Posts/' + id, postData)
                 .then((res)=>{
@@ -355,7 +361,7 @@ class Upload extends React.Component{
                             })}
                             </div> 
                             <div>
-                                <button onClick={this.addAframePhoto()}>Add Aframe Photo</button>
+                                <button onClick={this.addAframePhoto.bind(this)}>Add Aframe Photo</button>
                             </div> 
                             <div className="text-center">
                                 <button style={aframeCheckStyle} className="upload-button" onClick={this.submit.bind(this)}>Submit</button>

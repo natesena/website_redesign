@@ -25,13 +25,24 @@ class AframeHome extends React.Component{
         // console.log(`homescene calculated rotation of ${index}: `, yAxisRotation)
         return `0 ${-yAxisRotation} 0`
     }
+    returnFeaturedImage(post){
+        // console.log(post.aframePhotoLinks)
+        for(let i = 0; i < post.aframePhotoLinks.length; i++){
+            if(post.aframePhotoLinks[i].featured){
+                // console.log("featured img: ", post.aframePhotoLinks[i].url)
+                return post.aframePhotoLinks[i].url
+            }
+        }
+        // console.log("no featured img")
+            return false
+    }
     render(){
         return(
             <a-scene embedded>
                 <a-sky src="http://blog.topazlabs.com/wp-content/uploads/2013/07/Screen-Shot-2013-12-11-at-10.42.18-AM.png"></a-sky>
                 <a-circle color="#CCC" radius="20" position="0 -3 0" rotation="-90 0 0"></a-circle>
                 {this.props.posts.map((post, index)=>{
-                    return <AframePost key={post._id} title={post.title} description={post.aframeDescription} body={post.aframeBody} index={index} position={this.calculatePosition(index, this.props.posts.length, 7, 3)} rotation={this.calculateRotation(index, this.props.posts.length)}/>
+                    return <AframePost key={post._id} title={post.title} description={post.aframeDescription} featuredImage={this.returnFeaturedImage(post)} body={post.aframeBody} index={index} position={this.calculatePosition(index, this.props.posts.length, 7, 3)} rotation={this.calculateRotation(index, this.props.posts.length)}/>
                 })}
             </a-scene>
         )

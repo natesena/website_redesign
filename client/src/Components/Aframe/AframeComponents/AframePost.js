@@ -22,10 +22,15 @@ class AframePost extends React.Component{
         return coordinates.join(" ")
     }
     render(){
+        let featuredImage = null
+        if(this.props.featuredImage){
+            featuredImage = <a-image src={`${this.props.featuredImage}`} width="2" position={this.props.position} rotation={this.props.rotation}></a-image>
+        }
         return(
             <a-entity>
                 <a-text value={`${this.props.title}`} color="#000000" align="center" width="2" position={this.formatPosition(0, 0.9, 0,this.props.position)} rotation={this.props.rotation}></a-text>
                 <a-text value={`${this.props.description}`} color="#000000" align="center" width="2" position={this.formatPosition(0, 0.75, 0,this.props.position)} rotation={this.props.rotation}></a-text>
+                {featuredImage}
                 <a-plane height="2" width="2" color="#CCBBAA" position={this.props.position} rotation={this.props.rotation}></a-plane>
                 <a-plane height="2" width="2" color="#CCBBAA" position={this.props.position} rotation={this.reverseRotation(this.props.rotation)}></a-plane>
             </a-entity>
