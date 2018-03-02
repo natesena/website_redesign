@@ -127,9 +127,9 @@ class Post extends React.Component{
                 </div>
                 <div className="row post-user-buttons">
                     <div className="post-button-container">
-                        {this.props.buttons.map((button)=>{
+                        {this.props.buttons.map((button,index)=>{
                                 return(
-                                    <div key={button._id} className="post-link-container">
+                                    <div key={index} className="post-link-container">
                                         <a  className="post-link" href={button.url}>{` ${button.title}  `}<i className="fa fa-angle-right"></i></a>
                                     </div>
                                 )

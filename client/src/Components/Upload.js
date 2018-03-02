@@ -183,6 +183,11 @@ class Upload extends React.Component{
             buttons: [...this.state.buttons, {title: '', url: ''}]
         })
     }
+    addAframePhoto(){
+        this.setState({
+            aframePhotoLinks: [...this.state.aframePhotoLinks, {url:"", featured: false}]
+        })
+    }
     linkChange(evt, index){
         // console.log("name: ", evt.target.name)
         // console.log("value: ", evt.target.value)
@@ -348,7 +353,10 @@ class Upload extends React.Component{
                                     </div>
                                 )
                             })}
-                            </div>  
+                            </div> 
+                            <div>
+                                <button onClick={this.addAframePhoto()}>Add Aframe Photo</button>
+                            </div> 
                             <div className="text-center">
                                 <button style={aframeCheckStyle} className="upload-button" onClick={this.submit.bind(this)}>Submit</button>
                             </div>
