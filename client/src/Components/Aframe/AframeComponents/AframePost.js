@@ -12,6 +12,7 @@ class AframePost extends React.Component{
         // console.log(`returnCoordinates ${this.props.index}: `, returnCoordinates)
         return returnCoordinates
     }
+    //format position takes inputs to move things around
     formatPosition(x,y,z, positionString){
         // console.log("pos: ", positionString)
         var coordinates = positionString.split(' ')
@@ -24,7 +25,7 @@ class AframePost extends React.Component{
     render(){
         let featuredImage = null
         if(this.props.featuredImage){
-            featuredImage = <a-image src={`${this.props.featuredImage}`} width="2" position={this.props.position} rotation={this.props.rotation}></a-image>
+            featuredImage = <a-image src={`${this.props.featuredImage}`} width="2" position={this.props.imagePosition} rotation={this.props.rotation}></a-image>
         }
         return(
             <a-entity>

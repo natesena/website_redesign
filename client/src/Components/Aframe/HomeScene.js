@@ -42,8 +42,31 @@ class AframeHome extends React.Component{
                 <a-sky src="http://blog.topazlabs.com/wp-content/uploads/2013/07/Screen-Shot-2013-12-11-at-10.42.18-AM.png"></a-sky>
                 <a-circle color="#CCC" radius="20" position="0 -3 0" rotation="-90 0 0"></a-circle>
                 {this.props.posts.map((post, index)=>{
-                    return <AframePost key={post._id} title={post.title} description={post.aframeDescription} featuredImage={this.returnFeaturedImage(post)} body={post.aframeBody} index={index} position={this.calculatePosition(index, this.props.posts.length, 7, 3)} rotation={this.calculateRotation(index, this.props.posts.length)}/>
+                    return <AframePost key={post._id} title={post.title} description={post.aframeDescription} featuredImage={this.returnFeaturedImage(post)} body={post.aframeBody} index={index} imagePosition={this.calculatePosition(index, this.props.posts.length, 6.9, 3)} position={this.calculatePosition(index, this.props.posts.length, 7, 3)} rotation={this.calculateRotation(index, this.props.posts.length)}/>
                 })}
+                <a-camera>
+                    {/* need an animation end */}
+                    <a-cursor>
+                        <a-animation 
+                            begin="click"
+                            attribute="scale"
+                            dur="500"
+                            fill="forwards"
+                            from="1.1 1.1 1.1"
+                            to="0.2 0.2 0.2"
+                            >
+                        </a-animation>
+                        <a-animation 
+                            begin="click"
+                            attribute="color"
+                            dur="500"
+                            fill="forwards"
+                            from="#F00"
+                            to="#000"
+                            >
+                        </a-animation>
+                    </a-cursor>
+                </a-camera>
             </a-scene>
         )
     }

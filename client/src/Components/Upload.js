@@ -355,16 +355,16 @@ class Upload extends React.Component{
                                 return(
                                     <div key={`aframePhotoLink-${index}`}>
                                         <input name="aframeURL" style={aframeLinkStyle} value={this.state.aframePhotoLinks[index].url} placeholder="url" onChange={(evt)=>{this.aframeLinkChange(evt,index)}}></input>
-                                        <input name="aframeCheckBox" type="checkbox" value={this.state.aframePhotoLinks[index].featured} onChange={(evt)=>{this.aframeLinkChange(evt,index)}}></input>
+                                        <input name="aframeCheckBox" type="checkbox" value={this.state.aframePhotoLinks[index].featured} checked={this.state.aframePhotoLinks[index].featured} onChange={(evt)=>{this.aframeLinkChange(evt,index)}}></input>
                                     </div>
                                 )
                             })}
                             </div> 
                             <div>
-                                <button onClick={this.addAframePhoto.bind(this)}>Add Aframe Photo</button>
+                                <button className="upload-button" onClick={this.addAframePhoto.bind(this)}>Add Aframe Photo</button>
                             </div> 
                             <div className="text-center">
-                                <button style={aframeCheckStyle} className="upload-button" onClick={this.submit.bind(this)}>Submit</button>
+                                <button className="upload-button" onClick={this.submit.bind(this)}>Submit</button>
                             </div>
                         </div>
                     </div>
