@@ -46,7 +46,11 @@ class AframeHome extends React.Component{
                 })}
                 <a-camera>
                     {/* need an animation end */}
-                    <a-cursor>
+                    <a-entity cursor="fuse: true; fuseTimeout: 500"
+                    position="0 0 -1"
+                    geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+                    material="color: black; shader: flat"
+                    raycaster="far: 20; interval: 500; objects: .clickable">
                         <a-animation 
                             begin="click"
                             attribute="scale"
@@ -58,14 +62,14 @@ class AframeHome extends React.Component{
                         </a-animation>
                         <a-animation 
                             begin="click"
-                            attribute="color"
+                            attribute="material.color"
                             dur="500"
                             fill="forwards"
                             from="#F00"
                             to="#000"
                             >
                         </a-animation>
-                    </a-cursor>
+                        </a-entity>
                 </a-camera>
             </a-scene>
         )

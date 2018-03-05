@@ -28,7 +28,7 @@ class AframePost extends React.Component{
             featuredImage = <a-image src={`${this.props.featuredImage}`} width="2" position={this.props.imagePosition} rotation={this.props.rotation}></a-image>
         }
         return(
-            <a-entity>
+            <a-entity class="clickable">
                 <a-text value={`${this.props.title}`} color="#000000" align="center" width="2" position={this.formatPosition(0, 0.9, 0,this.props.position)} rotation={this.props.rotation}></a-text>
                 <a-text value={`${this.props.description}`} color="#000000" align="center" width="2" position={this.formatPosition(0, 0.75, 0,this.props.position)} rotation={this.props.rotation}></a-text>
                 {featuredImage}
