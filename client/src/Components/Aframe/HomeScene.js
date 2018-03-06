@@ -46,30 +46,46 @@ class AframeHome extends React.Component{
                 })}
                 <a-camera>
                     {/* need an animation end */}
-                    <a-entity cursor="fuse: true; fuseTimeout: 500"
+                    <a-entity cursor="fuse: true; fuseTimeout: 1500"
                     position="0 0 -1"
                     geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
                     material="color: black; shader: flat"
-                    raycaster="far: 20; interval: 500; objects: .clickable">
+                    raycaster="far: 20; objects: .clickable">
                         <a-animation 
-                            begin="click"
+                            begin="mouseenter"
                             attribute="scale"
-                            dur="500"
+                            end="mouseleave"
+                            dur="1500"
                             fill="forwards"
                             from="1.1 1.1 1.1"
-                            to="0.2 0.2 0.2"
+                            to="0.4 0.4 0.4"
                             >
                         </a-animation>
-                        <a-animation 
-                            begin="click"
+                         <a-animation 
+                            begin="mouseleave"
+                            dur="100"
+                            attribute="scale"
+                            fill="forwards"
+                            to="1 1 1"
+                            >
+                              <a-animation 
+                            begin="mouseleave"
                             attribute="material.color"
-                            dur="500"
+                            to="black"
+                            >
+                            </a-animation>
+                        </a-animation>
+                        <a-animation 
+                            begin="mouseenter"
+                            end="mouseleave"
+                            attribute="material.color"
+                            dur="1500"
                             fill="forwards"
                             from="#F00"
                             to="#000"
                             >
                         </a-animation>
-                        </a-entity>
+                    </a-entity>
                 </a-camera>
             </a-scene>
         )
