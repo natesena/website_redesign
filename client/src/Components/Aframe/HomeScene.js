@@ -2,6 +2,7 @@ import 'aframe'
 import React from 'react'
 import AframePost from './AframeComponents/AframePost.js'
 import axios from 'axios'
+import AframeNav from './AframeComponents/AframeNav.js'
 
 
 class AframeHome extends React.Component{
@@ -49,6 +50,7 @@ class AframeHome extends React.Component{
     render(){
         return(
             <a-scene>
+                <AframeNav position="0 3 -5"/>
                 <a-sky src="http://blog.topazlabs.com/wp-content/uploads/2013/07/Screen-Shot-2013-12-11-at-10.42.18-AM.png"></a-sky>
                 <a-circle color="#CCC" radius="20" position="0 -3 0" rotation="-90 0 0"></a-circle>
                 {this.state.posts.map((post, index)=>{
@@ -78,12 +80,12 @@ class AframeHome extends React.Component{
                             fill="forwards"
                             to="1 1 1"
                             >
-                              <a-animation 
+                        </a-animation>
+                        <a-animation 
                             begin="mouseleave"
                             attribute="material.color"
                             to="black"
                             >
-                            </a-animation>
                         </a-animation>
                         <a-animation 
                             begin="mouseenter"

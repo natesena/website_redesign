@@ -4,10 +4,6 @@ import Post from './Posts/Posts.js'
 import Navbar from "./Navbar.js"
 // import ReactPaginate from 'react-paginate';
 
-let aframeStyle= {
-    height: window.innerHeight,
-}
-
 class Home extends React.Component{
     state={
         posts: []

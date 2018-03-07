@@ -57,9 +57,9 @@ const textAreaStyle ={
 const aframeLinkStyle = {
     width: "90%"
 }
-const aframeCheckStyle = {
-    width: "10%"
-}
+// const aframeCheckStyle = {
+//     width: "10%"
+// }
 
 
 
