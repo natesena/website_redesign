@@ -9,10 +9,15 @@ import Upload from './Components/Upload.js'
 import Blog from './Components/Blog.js'
 import Ideas from './Components/Ideas.js'
 import Login from './Components/Login.js'
+import Welcome from './Components/Welcome.js'
+import AframeHome from './Components/Aframe/HomeScene.js'
 
-
+const appBodyStyle={
+  minHeight: window.innerHeight
+}
 
 class App extends Component {
+
   getID(){
     let url = window.location.href
     var splits = url.split('/')
@@ -26,12 +31,16 @@ class App extends Component {
   }
   render() {
     return (
-      
       <div className="App">
-        <Navbar/>
-        <div className="App-Body">
+        <div style={appBodyStyle} className="App-Body">
           <Switch>
             <Route exact path="/" render={(props)=>{
+              return <Welcome/>
+            }} />
+            <Route exact path="/vr" render={(props)=>{
+              return <AframeHome/>
+            }} />
+            <Route path="/home" render={(props)=>{
               return <Home/>
             }} />
             <Route exact path="/login" render={(props)=>{

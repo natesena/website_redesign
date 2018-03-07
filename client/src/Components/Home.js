@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import Post from './Posts/Posts.js'
-import AframeHome from './Aframe/HomeScene.js'
+import Navbar from "./Navbar.js"
 // import ReactPaginate from 'react-paginate';
 
 let aframeStyle= {
@@ -27,9 +27,7 @@ class Home extends React.Component{
     render(){
         return(
             <div>
-                 <div className="aframe" style={aframeStyle}>
-                    <AframeHome posts={this.state.posts}/>
-                </div>
+                <Navbar/>
                 <div className="body-container">
                     <div className="text-center title-wrapper">
                         <h1 className="title">THIS IS THE HOME</h1>

@@ -1,11 +1,21 @@
 import 'aframe'
 import React from 'react'
 import AframePost from './AframeComponents/AframePost.js'
+import axios from 'axios'
 
 
 class AframeHome extends React.Component{
     state={
-
+        posts: []
+    }
+    componentDidMount(){
+        axios.get('/api/Posts')
+        .then((res)=>{
+            // console.log("res: ", res)
+            this.setState({
+                posts: [...res.data.Posts]
+            })
+        })
     }
     //calculatePosition returns the location of where an aframe post should be.
     calculatePosition(index, length, rad, wid){
@@ -38,11 +48,11 @@ class AframeHome extends React.Component{
     }
     render(){
         return(
-            <a-scene embedded>
+            <a-scene>
                 <a-sky src="http://blog.topazlabs.com/wp-content/uploads/2013/07/Screen-Shot-2013-12-11-at-10.42.18-AM.png"></a-sky>
                 <a-circle color="#CCC" radius="20" position="0 -3 0" rotation="-90 0 0"></a-circle>
-                {this.props.posts.map((post, index)=>{
-                    return <AframePost key={post._id} title={post.title} description={post.aframeDescription} featuredImage={this.returnFeaturedImage(post)} body={post.aframeBody} index={index} imagePosition={this.calculatePosition(index, this.props.posts.length, 6.9, 3)} position={this.calculatePosition(index, this.props.posts.length, 7, 3)} rotation={this.calculateRotation(index, this.props.posts.length)}/>
+                {this.state.posts.map((post, index)=>{
+                    return <AframePost key={post._id} title={post.title} description={post.aframeDescription} featuredImage={this.returnFeaturedImage(post)} body={post.aframeBody} index={index} imagePosition={this.calculatePosition(index, this.state.posts.length, 6.9, 3)} position={this.calculatePosition(index, this.state.posts.length, 7, 3)} rotation={this.calculateRotation(index, this.state.posts.length)}/>
                 })}
                 <a-camera>
                     {/* need an animation end */}
