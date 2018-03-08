@@ -47,8 +47,38 @@ class AframePost extends React.Component{
                 <a-plane height="2" width="2" color={this.state.color} position={this.props.position} rotation={this.props.rotation}>
                 </a-plane>
                 <a-plane height="2" width="2" color={this.state.color} position={this.props.position} rotation={this.reverseRotation(this.props.rotation)}></a-plane>
-                {/* <a-animation begin="mouseenter" end="mouseleave" attribute="position" direction="alternate" from={this.props.position} to={this.formatPosition(0, .1, 0, this.props.position)} dur="1500" repeat="indefinite">
-                </a-animation> */}
+                    <a-animation 
+                        begin="mouseenter" 
+                        end="mouseleave" 
+                        attribute="position" 
+                        direction="alternate" 
+                        from="0 0 0" 
+                        to="0 0.1 0" 
+                        dur="1500" 
+                        repeat="indefinite">
+                    </a-animation>
+                    <a-animation 
+                        begin="mouseenter" 
+                        end="mouseleave" 
+                        attribute="scale" 
+                        from="1 1 1" 
+                        to="1.1 1.1 1" 
+                        dur="500" 
+                    >
+                    </a-animation>
+                    <a-animation 
+                        begin="mouseleave" 
+                        attribute="scale" 
+                        to="1 1 1" 
+                    >
+                    </a-animation>
+                    <a-animation 
+                        begin="mouseleave" 
+                        end="mouseleave" 
+                        attribute="position" 
+                        to="0 0 0" 
+                        >
+                    </a-animation>
             </a-entity>
         )
     }
