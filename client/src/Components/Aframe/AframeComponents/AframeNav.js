@@ -1,5 +1,6 @@
 import 'aframe'
 import React from 'react'
+import AframeNavLink from "./AframeNavLink.js"
 
 class AframeNav extends React.Component{
     formatPosition(x,y,z, positionString){
@@ -17,11 +18,12 @@ class AframeNav extends React.Component{
         console.log("aframeNavPos: ", this.props.position)
         return(
             <a-entity class="clickable" position={this.props.position}>
-                <a-text class="clickable" value="Home" align="center" position="-3 0 0" geometry="primitive:plane" material="color: black; transparent: true; opacity: 0"></a-text>
-                <a-text class="clickable" value="Blog" align="center" position="-2 0 0" geometry="primitive:plane" material="color: black; transparent: true; opacity: 0"></a-text>
-                <a-text class="clickable" value="Web Development" align="center" position="-0.5 0 0" geometry="primitive:plane" material="color: black; transparent: true; opacity: 0"></a-text>
-                <a-text class="clickable" value="Product Design" align="center" position="1.5 0 0" geometry="primitive:plane" material="color: black; transparent: true; opacity: 0"></a-text>
-                <a-text class="clickable" value="Ideas" align="center" position="3 0 0" geometry="primitive:plane" material="color: black; transparent: true; opacity: 0"></a-text>
+                <AframeNavLink text="Home" position="-3 0 0" width="1"/>
+                <AframeNavLink text="Blog" position="-2 0 0" width="1"/>
+                <AframeNavLink text="Web Development" position="-0.5 0 0" width="2"/>
+                <AframeNavLink text="Product Design" position="1.5 0 0" width="2"/>
+                <AframeNavLink text="Ideas" position="3 0 0" width="1"/>
+               
             </a-entity>
         )
     }
