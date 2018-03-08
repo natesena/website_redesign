@@ -50,7 +50,7 @@ class AframeHome extends React.Component{
     render(){
         return(
             <a-scene>
-                <AframeNav position="0 3 -5"/>
+                <AframeNav position="0 3 -7"/>
                 <a-sky src="http://blog.topazlabs.com/wp-content/uploads/2013/07/Screen-Shot-2013-12-11-at-10.42.18-AM.png"></a-sky>
                 <a-circle color="#CCC" radius="20" position="0 -3 0" rotation="-90 0 0"></a-circle>
                 {this.state.posts.map((post, index)=>{

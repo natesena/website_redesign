@@ -17,11 +17,11 @@ class AframeNav extends React.Component{
         console.log("aframeNavPos: ", this.props.position)
         return(
             <a-entity class="clickable" position={this.props.position}>
-                <a-text class="clickable" value="Home" align="center" position="-3 0 0" geometry="primitive:plane"></a-text>
-                <a-text class="clickable" value="Blog" align="center" position="-2 0 0" geometry="primitive:plane"></a-text>
-                <a-text class="clickable" value="Web Development" align="center" position="-0.5 0 0" geometry="primitive:plane"></a-text>
-                <a-text class="clickable" value="Product Design" align="center" position="1.5 0 0" geometry="primitive:plane"></a-text>
-                <a-text class="clickable" value="Ideas" align="center" position="3 0 0" geometry="primitive:plane"></a-text>
+                <a-text class="clickable" value="Home" align="center" position="-3 0 0" geometry="primitive:plane" material="color: black; transparent: true; opacity: 0"></a-text>
+                <a-text class="clickable" value="Blog" align="center" position="-2 0 0" geometry="primitive:plane" material="color: black; transparent: true; opacity: 0"></a-text>
+                <a-text class="clickable" value="Web Development" align="center" position="-0.5 0 0" geometry="primitive:plane" material="color: black; transparent: true; opacity: 0"></a-text>
+                <a-text class="clickable" value="Product Design" align="center" position="1.5 0 0" geometry="primitive:plane" material="color: black; transparent: true; opacity: 0"></a-text>
+                <a-text class="clickable" value="Ideas" align="center" position="3 0 0" geometry="primitive:plane" material="color: black; transparent: true; opacity: 0"></a-text>
             </a-entity>
         )
     }
