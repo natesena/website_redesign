@@ -7,7 +7,7 @@ class AframeNavLink extends React.Component{
     }
     render(){
         return(
-            <a-text class="clickable" scale="1 1 1" value={this.props.text} align="center" position={this.props.position} geometry={this.calculateGeometry()} material="color: black; transparent: true; opacity: 0.1">
+            <a-text class="clickable" scale="1 1 1" value={this.props.text} align="center" position={this.props.position} geometry={this.calculateGeometry()} material="color: black; opacity: 0.3">
                     <a-animation
                         attribute="scale"
                         dur="500"

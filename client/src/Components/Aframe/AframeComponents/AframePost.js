@@ -1,9 +1,12 @@
 import 'aframe'
 import React from 'react'
+import axios from "axios"
+import {Redirect} from 'react-router-dom'
 
 class AframePost extends React.Component{
     state={
-        color: "yellow"
+        color: "#FF0000",
+        redirect: false
     }
     //reverseRotation places a second plane in the same spot as the first plane carrying the post
     //this second plane is angled the exact opposite as to make the post visible from both sides
@@ -17,36 +20,37 @@ class AframePost extends React.Component{
     }
     //format position takes inputs to move things around
     formatPosition(x,y,z, positionString){
-        console.log("pos: ", positionString)
+        // console.log("pos: ", positionString)
         var coordinates = positionString.split(' ')
         coordinates[0] = Number(coordinates[0]) + x
         coordinates[1] = Number(coordinates[1]) + y
         coordinates[2] = Number(coordinates[2]) + z
-        console.log("coordinates: ", coordinates)
+        // console.log("coordinates: ", coordinates)
         return coordinates.join(" ")
-    }
-    click(){
-        console.log("clicked")
-        this.setState({
-            color: "red"
-        })
     }
     onHover(){
         console.log("hovering")
+    }
+    click(){
+       this.setState({
+           redirect: true
+       })
     }
     render(){
         let featuredImage = null
         if(this.props.featuredImage){
             featuredImage = <a-image src={`${this.props.featuredImage}`} width="2" position={this.props.imagePosition} rotation={this.props.rotation}></a-image>
         }
+        if(this.state.redirect){
+            return <Redirect to={`/vr/${this.props.type}/${this.props.id}`}/>
+        }
         return(
-            <a-entity class="clickable" onClick={this.click.bind(this)}>
-                <a-text value={`${this.props.title}`} color="#000000" align="center" width="2" position={this.formatPosition(0, 0.9, 0,this.props.position)} rotation={this.props.rotation}></a-text>
-                <a-text value={`${this.props.description}`} color="#000000" align="center" width="2" position={this.formatPosition(0, 0.75, 0,this.props.position)} rotation={this.props.rotation}></a-text>
+            <a-entity class="clickable" onClick={this.click.bind(this)} geometry="primitive:plane; width: 2">
+                <a-text value={`${this.props.title}`} color="#FFFFFF" align="center" scale="3 3 1" width="2" position={this.formatPosition(0, 0.75, 0,this.props.position)} rotation={this.props.rotation}></a-text>
+                {/* <a-text value={`${this.props.description}`} color="#FFFFFF" align="center" width="2" position={this.formatPosition(0, 0.75, 0,this.props.position)} rotation={this.props.rotation}></a-text> */}
                 {featuredImage}
-                <a-plane height="2" width="2" color={this.state.color} position={this.props.position} rotation={this.props.rotation}>
-                </a-plane>
-                <a-plane height="2" width="2" color={this.state.color} position={this.props.position} rotation={this.reverseRotation(this.props.rotation)}></a-plane>
+                <a-plane height="2" width="2" color="#000000" opacity="0.2" position={this.props.position} rotation={this.props.rotation}></a-plane>
+                <a-plane height="2" width="2" color="#000000" opacity="0.2" position={this.props.position} rotation={this.reverseRotation(this.props.rotation)}></a-plane>
                     <a-animation 
                         begin="mouseenter" 
                         end="mouseleave" 

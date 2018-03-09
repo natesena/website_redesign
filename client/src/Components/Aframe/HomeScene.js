@@ -52,9 +52,12 @@ class AframeHome extends React.Component{
             <a-scene>
                 <AframeNav position="0 3 -7"/>
                 <a-sky src="http://blog.topazlabs.com/wp-content/uploads/2013/07/Screen-Shot-2013-12-11-at-10.42.18-AM.png"></a-sky>
-                <a-circle color="#CCC" radius="20" position="0 -3 0" rotation="-90 0 0"></a-circle>
+                <a-circle color="#CCCCCC" radius="20" position="0 -3 0" rotation="-90 0 0"></a-circle>
                 {this.state.posts.map((post, index)=>{
-                    return <AframePost key={post._id} title={post.title} description={post.aframeDescription} featuredImage={this.returnFeaturedImage(post)} body={post.aframeBody} index={index} imagePosition={this.calculatePosition(index, this.state.posts.length, 6.9, 3)} position={this.calculatePosition(index, this.state.posts.length, 7, 3)} rotation={this.calculateRotation(index, this.state.posts.length)}/>
+                    if(this.state.posts.length === 1){
+                        console.log("one post")
+                    }
+                    return <AframePost key={post._id} id={post._id} title={post.title} description={post.aframeDescription} type={post.type} featuredImage={this.returnFeaturedImage(post)} body={post.aframeBody} index={index} imagePosition={this.calculatePosition(index, this.state.posts.length, 6.9, 3)} position={this.calculatePosition(index, this.state.posts.length, 7, 3)} rotation={this.calculateRotation(index, this.state.posts.length)}/>
                 })}
                 <a-camera>
                     {/* need an animation end */}

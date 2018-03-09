@@ -4,18 +4,18 @@ import AframeNavLink from "./AframeNavLink.js"
 
 class AframeNav extends React.Component{
     formatPosition(x,y,z, positionString){
-        console.log("input format string: ", positionString)
+        // console.log("input format string: ", positionString)
         var positionSplits = positionString.split(" ")
         positionSplits[0] = parseFloat(positionSplits[0]) + x 
         positionSplits[1] = parseFloat(positionSplits[1]) + y
         positionSplits[2] = parseFloat(positionSplits[2]) + z
-        console.log("formatted splits: ", positionSplits)
+        // console.log("formatted splits: ", positionSplits)
         var returnString = positionSplits.join(" ")
-        console.log("formatted pos string: ", returnString)
+        // console.log("formatted pos string: ", returnString)
         return returnString
     }
     render(){
-        console.log("aframeNavPos: ", this.props.position)
+        // console.log("aframeNavPos: ", this.props.position)
         return(
             <a-entity class="clickable" position={this.props.position}>
                 <AframeNavLink text="Home" position="-3 0 0" width="1"/>
