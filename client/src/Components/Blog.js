@@ -4,7 +4,7 @@ import Post from './Posts/Posts.js'
 
 class Blog extends React.Component{
     state={
-        id: '',//oly used if there is a single post
+        id: '',//only used if there is a single post
         posts:[]
     }
     //getOneBlogPost hits a different route to only return one post

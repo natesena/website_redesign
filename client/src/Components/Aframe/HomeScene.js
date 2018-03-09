@@ -3,21 +3,90 @@ import React from 'react'
 import AframePost from './AframeComponents/AframePost.js'
 import axios from 'axios'
 import AframeNav from './AframeComponents/AframeNav.js'
-
+import FeaturedPost from './AframeComponents/FeaturedPost.js'
 
 class AframeHome extends React.Component{
     state={
-        posts: []
+        posts: [],
+        id: null,
+        featured: false
     }
     componentDidMount(){
-        axios.get('/api/Posts')
+        //if a singular post get one post
+            //render differently
+        //if a singular category get one category
+            //render same
+        //if all categories 
+            //render same
+        let url = window.location.href
+        var urlSplits = url.split("/")
+        var type = null
+        var id = null
+        console.log(urlSplits)
+        for(let i = 0; i < urlSplits.length; i++){
+            if(urlSplits[i] === "vr"){
+                if(urlSplits[i + 1]){
+                    type = urlSplits[i + 1]
+                    if(urlSplits[i + 2]){
+                        id = urlSplits[i + 2]
+                        this.getOnePost(id)
+                    }
+                    else{
+                        this.getAllTypePosts(type)
+                    }
+                }
+                else{
+                    this.getAllPosts()
+                }
+            }
+        }
+    }
+    getOnePost(id){
+        console.log("get one post")
+        axios.get('/api/Posts/' + id)
         .then((res)=>{
-            // console.log("res: ", res)
+            console.log("res: ", res)
             this.setState({
-                posts: [...res.data.Posts]
+                id: id,
+                posts: [res.data.Post],
+                featured: true
             })
         })
     }
+    //getAllPosts hits a route to deliver all posts
+    getAllTypePosts(type){
+        axios.get('/api/Posts/', {params:{type: type}})
+        .then((res)=>{
+            console.log("res: ", res)
+            this.setState({
+                posts: [...res.data.Posts],
+                id: null,
+                featured: false
+            })
+        })
+    }
+    getAllPosts(){
+        axios.get('/api/Posts/', {params:{type: "Blog"}})
+        .then((res)=>{
+            console.log("res: ", res)
+            this.setState({
+                posts: [...res.data.Posts],
+                id: null,
+                featured: false
+            })
+        })
+    }
+    //if there is an id in the url get one post otherwise all posts
+    // componentDidMount(){
+        // let id = this.props.getId()
+        // // console.log(id)
+        // if(id){
+        //     this.getOneBlogPost(id)
+        // }
+        // else{
+        //     this.getAllBlogPosts()
+        // }
+    // }
     //calculatePosition returns the location of where an aframe post should be.
     calculatePosition(index, length, rad, wid){
         // console.log('calc pos: ', index, length, rad, wid)
@@ -54,10 +123,23 @@ class AframeHome extends React.Component{
                 <a-sky src="http://blog.topazlabs.com/wp-content/uploads/2013/07/Screen-Shot-2013-12-11-at-10.42.18-AM.png"></a-sky>
                 <a-circle color="#CCCCCC" radius="20" position="0 -3 0" rotation="-90 0 0"></a-circle>
                 {this.state.posts.map((post, index)=>{
-                    if(this.state.posts.length === 1){
+                    if(this.state.posts.length === 1 && this.state.featured){
                         console.log("one post")
+                        return <FeaturedPost key={index}/>
                     }
-                    return <AframePost key={post._id} id={post._id} title={post.title} description={post.aframeDescription} type={post.type} featuredImage={this.returnFeaturedImage(post)} body={post.aframeBody} index={index} imagePosition={this.calculatePosition(index, this.state.posts.length, 6.9, 3)} position={this.calculatePosition(index, this.state.posts.length, 7, 3)} rotation={this.calculateRotation(index, this.state.posts.length)}/>
+                    return <AframePost 
+                                key={post._id} 
+                                id={post._id} 
+                                click={()=>this.getOnePost(post._id)} 
+                                title={post.title} 
+                                description={post.aframeDescription} 
+                                type={post.type} 
+                                featuredImage={this.returnFeaturedImage(post)} 
+                                body={post.aframeBody} 
+                                index={index} 
+                                imagePosition={this.calculatePosition(index, this.state.posts.length, 6.9, 3)} 
+                                position={this.calculatePosition(index, this.state.posts.length, 7, 3)} 
+                                rotation={this.calculateRotation(index, this.state.posts.length)}/>
                 })}
                 <a-camera>
                     {/* need an animation end */}

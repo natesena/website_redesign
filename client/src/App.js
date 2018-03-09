@@ -37,7 +37,7 @@ class App extends Component {
             <Route exact path="/" render={(props)=>{
               return <Welcome/>
             }} />
-            <Route exact path="/vr" render={(props)=>{
+            <Route path="/vr" render={(props)=>{
               return <AframeHome/>
             }} />
             <Route path="/home" render={(props)=>{

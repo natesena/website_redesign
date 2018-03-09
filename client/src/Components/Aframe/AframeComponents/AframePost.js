@@ -1,6 +1,5 @@
 import 'aframe'
 import React from 'react'
-import axios from "axios"
 import {Redirect} from 'react-router-dom'
 
 class AframePost extends React.Component{
@@ -31,11 +30,6 @@ class AframePost extends React.Component{
     onHover(){
         console.log("hovering")
     }
-    click(){
-       this.setState({
-           redirect: true
-       })
-    }
     render(){
         let featuredImage = null
         if(this.props.featuredImage){
@@ -45,7 +39,9 @@ class AframePost extends React.Component{
             return <Redirect to={`/vr/${this.props.type}/${this.props.id}`}/>
         }
         return(
-            <a-entity class="clickable" onClick={this.click.bind(this)} geometry="primitive:plane; width: 2">
+            <a-entity class="clickable" onClick={()=>{
+                console.log("sending in post")
+                this.props.click()}} geometry="primitive:plane; width: 2">
                 <a-text value={`${this.props.title}`} color="#FFFFFF" align="center" scale="3 3 1" width="2" position={this.formatPosition(0, 0.75, 0,this.props.position)} rotation={this.props.rotation}></a-text>
                 {/* <a-text value={`${this.props.description}`} color="#FFFFFF" align="center" width="2" position={this.formatPosition(0, 0.75, 0,this.props.position)} rotation={this.props.rotation}></a-text> */}
                 {featuredImage}
