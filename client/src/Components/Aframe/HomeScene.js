@@ -101,6 +101,7 @@ class AframeHome extends React.Component{
         return coordinates 
     }
     calculateRotation(index,length){
+        //each post should have a different rotation in 3d space to face user
         var yAxisRotation = (360/length) * index
         // console.log(`homescene calculated rotation of ${index}: `, yAxisRotation)
         return `0 ${-yAxisRotation} 0`
