@@ -11,7 +11,7 @@ const LinkStyle = {
 }
 let navStyle = {
     backgroundColor: 'black',
-    // width: window.innerWidth
+    width: window.innerWidth
 }
 
 class Navbar extends React.Component{
