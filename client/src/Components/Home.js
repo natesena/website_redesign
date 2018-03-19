@@ -6,31 +6,67 @@ import Navbar from "./Navbar.js"
 
 class Home extends React.Component{
     state={
-        posts: []
+        posts: [],
+        currentFeaturedPostIndex: 0
     }
+
     componentDidMount(){
         axios.get('/api/Posts')
         .then((res)=>{
             // console.log("res: ", res)
             this.setState({
-                posts: [...res.data.Posts]
+                posts: [...res.data.Posts],
+                currentFeaturedPostIndex: 0
             })
-        })
+        },setInterval(this.changeFeaturedImg(), 3000))
+        
+    }
+    changeFeaturedImg(){
+        console.log("tried to update featured img")
+        var newIndex = 0
+        if(this.state.currentFeaturedPostIndex === this.state.posts.length - 1){
+            this.setState({
+                currentFeaturedPostIndex: newIndex
+            })
+        }
+        else{
+            this.setState({
+                currentFeaturedPostIndex: this.state.currentFeaturedPostIndex + 1
+            })
+        }
     }
     hideDeletedPost(){
         //make the display of a particular post none!
     }
+    returnFeaturedImgURL(index){
+        console.log("tried to update featured img")
+        if(this.state.posts.length > 0){
+            for(let i = 0; i < this.state.posts[index].aframePhotoLinks.length; i++){
+                if(this.state.posts[index].aframePhotoLinks[i].featured === true){
+                    var featuredImgSRC = this.state.posts[index].aframePhotoLinks[i].url
+                    console.log("featured img found: ", featuredImgSRC)
+                    return featuredImgSRC
+                }
+            }
+        }
+        console.log("no featured image for the post was found")
+        return null
+    }
     render(){
+        var imgSRC = this.returnFeaturedImgURL(this.state.currentFeaturedPostIndex)
         return(
             <div>
                 <Navbar/>
-                <div className="body-container">
-                    <div className="text-center title-wrapper">
-                        <h1 className="title">THIS IS THE HOME</h1>
+                <div className="body-container-top">
+                        <div style={{backgroundImage: imgSRC}} className="text-center title-wrapper">
+                            <h1 className="title">THIS IS THE HOME</h1>
+                        </div>
+                    <div className="body-container-width">
+                       
+                        {this.state.posts.map((post)=>{
+                            return <Post key={post._id} onDelete={this.hideDeletedPost.bind(this)} home={true} format={"many"} type={post.type} id={post._id} title={post.title} buttons={post.buttonLinks} description={JSON.parse(post.description)} bodyVisible={false} descriptionVisible={true} controls={true}/>
+                        })}
                     </div>
-                    {this.state.posts.map((post)=>{
-                        return <Post key={post._id} onDelete={this.hideDeletedPost.bind(this)} home={true} format={"many"} type={post.type} id={post._id} title={post.title} buttons={post.buttonLinks} description={JSON.parse(post.description)} bodyVisible={false} descriptionVisible={true} controls={true}/>
-                    })}
                 </div>
             </div>
         )

@@ -7,7 +7,6 @@ const LinkStyle = {
     margin: '10px',
     textDecoration: 'none',
     color: 'white',
-    textShadow: "1px 1px #AAA"
 }
 let navStyle = {
     backgroundColor: 'black',
@@ -15,6 +14,10 @@ let navStyle = {
 }
 
 class Navbar extends React.Component{
+    componentDidMount(){
+        var navEl = document.querySelector(".NavBar")
+        console.log("navEl Width: ", navEl.style.width)
+    }
     dropDownMenu(){
         let menuList = document.getElementById('menu-list')
         // console.log("menuList: ",menuList.style)
