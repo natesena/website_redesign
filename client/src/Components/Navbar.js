@@ -15,8 +15,8 @@ let navStyle = {
 
 class Navbar extends React.Component{
     componentDidMount(){
-        var navEl = document.querySelector(".NavBar")
-        console.log("navEl Width: ", navEl.style.width)
+        // var navEl = document.querySelector(".NavBar")
+        // console.log("navEl Width: ", navEl.style.width)
     }
     dropDownMenu(){
         let menuList = document.getElementById('menu-list')
@@ -51,6 +51,7 @@ class Navbar extends React.Component{
                     <li> <Link to='/Blog' style={LinkStyle}>Blog</Link></li>
                     <li><Link to='/Ideas' style={LinkStyle}>Ideas</Link></li>
                     <li><Link to='/UploadProject' style={LinkStyle}>Upload</Link></li>
+                    <li><Link to='/vr' style={LinkStyle}>Try VR</Link></li>
                 </ul>
             </div>
             

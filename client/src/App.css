@@ -31,7 +31,7 @@ i{
 .body-container-top{
   position: relative;
   /* border: 1px solid red; */
-  top: 100px;
+  top: 90px;
   /* padding: 0 50px */
 }
 .body-container-width{
@@ -97,6 +97,10 @@ p{
 }
 .name-input{
   width: 100%
+}
+.img-transition{
+  height: 30%;
+  min-height:300px 
 }
 /* End General App CSS */
 /* ----------------------- 2D Post CSS ----------------------------*/
