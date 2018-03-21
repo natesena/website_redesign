@@ -206,6 +206,7 @@ p{
 .NavBar {
   top: 0;
   margin: 0;
+  z-index: 2;
   position: absolute;
   color: white;
   padding: 20px 0
@@ -257,6 +258,9 @@ p{
 /* ------------------------------End Upload CSS ------------------------- */
 /* if on mobile */
 @media (max-width: 600px){
+  .NavBar{
+    padding: 10px 0
+  }
   .NavBar .fa{
     vertical-align: top;
     display: inline-block

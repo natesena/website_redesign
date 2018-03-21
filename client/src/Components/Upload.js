@@ -236,11 +236,15 @@ class Upload extends React.Component{
             var descriptionJSONData = convertToRaw(this.state.descriptionEditorState.getCurrentContent())
             alert("remember to email yourself the post for safe keeping")
             //post request and res
+            var postLinks = this.state.buttons
+            if(this.state.buttons[0].url === ''){
+                postLinks = null
+            }
             let postData = {
                 title: this.state.title,
                 description: JSON.stringify(descriptionJSONData),
                 type: this.state.type,
-                buttonLinks: this.state.buttons,
+                buttonLinks: postLinks,
                 body: JSON.stringify(bodyJSONData),
                 aframeDescription: this.state.aframeDescription,
                 aframeBody: this.state.aframeBody,
