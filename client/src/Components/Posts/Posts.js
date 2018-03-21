@@ -42,14 +42,20 @@ class Post extends React.Component{
         redirect:false
     }
     componentDidMount(){
-        if(this.props.format === "single"){
+        // I forget what this function is for exactly
+        if(this.props.format === "single"){//need to format where the buttons are
             // let appBodyEl = document.querySelector(".App-Body")
-            let bodyDropEl = document.querySelector(".body-drop")
+            let bodyDropEl = document.querySelector(".body-container-top")
             let postBodyEl = document.querySelector(".post-body")
             let postButtonsEl = document.querySelector(".post-user-buttons")
             // post-user-buttons
-            console.log(postButtonsEl.clientHeight)
-            postBodyEl.style.height = (window.innerHeight - (postButtonsEl.clientHeight + bodyDropEl.clientHeight)) + "px"
+            // console.log(postButtonsEl.clientHeight)
+            if(bodyDropEl && postBodyEl && postButtonsEl){
+                postBodyEl.style.height = (window.innerHeight - (postButtonsEl.clientHeight + bodyDropEl.clientHeight)) + "px"
+            }
+            else{
+                console.log("error with formatting")
+            }
         }
         //
         this.setState({

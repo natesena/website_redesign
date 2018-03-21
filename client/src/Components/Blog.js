@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import Post from './Posts/Posts.js'
+import NavBar from './Navbar'
 
 class Blog extends React.Component{
     state={
@@ -57,12 +58,15 @@ class Blog extends React.Component{
         }
         return(
             //dependent on the format of the post make it look differently
-            <div className="body-drop">
-                <div className="body-container">
-                    {title}
-                    {this.state.posts.map((post)=>{
-                        return <Post key={post._id} buttons={post.buttonLinks} format={postFormat} pageID={this.state.id} type={post.type} id={post._id} title={post.title} description={JSON.parse(post.description)} body={JSON.parse(post.body)} descriptionVisible={descriptionVisiblity} bodyVisible={bodyVisibility} controls={controlsVisibility}/>
-                    })}
+            <div>
+                <NavBar />
+                <div className="body-container-top">
+                    <div className="body-container">
+                        {title}
+                        {this.state.posts.map((post)=>{
+                            return <Post key={post._id} buttons={post.buttonLinks} format={postFormat} pageID={this.state.id} type={post.type} id={post._id} title={post.title} description={JSON.parse(post.description)} body={JSON.parse(post.body)} descriptionVisible={descriptionVisiblity} bodyVisible={bodyVisibility} controls={controlsVisibility}/>
+                        })}
+                    </div>
                 </div>
             </div>
         )

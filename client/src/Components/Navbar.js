@@ -45,7 +45,7 @@ class Navbar extends React.Component{
             <div className='NavBar' style={navStyle}>
                 <i className="toggle-nav fa fa-bars" onClick={this.dropDownMenu}></i>
                 <ul id="menu-list" className="NavList">
-                    <li><Link to='/' style={LinkStyle}>Home</Link></li>
+                    <li><Link to='/home' style={LinkStyle}>Home</Link></li>
                     <li><Link to='/WebDevelopment' style={LinkStyle}>Web Development</Link></li>
                     <li><Link to='/ProductDesign' style={LinkStyle}>Product Design</Link></li>
                     <li> <Link to='/Blog' style={LinkStyle}>Blog</Link></li>
