@@ -79,6 +79,16 @@ class Post extends React.Component{
         let blogBody = null
         let blogBodyStyle = manyBlogBodyStyle
         let blogDescription = null
+        let buttons = null
+        if(this.props.buttons){
+                buttons = this.props.buttons.map((button,index)=>{
+                return(
+                    <div key={index} className="post-link-container">
+                        <a  className="post-link" href={button.url}>{` ${button.title}  `}<i className="fa fa-angle-right"></i></a>
+                    </div>
+                )
+            })
+        }
         if(this.props.bodyVisible){
             if(this.props.format === "single"){
                 blogBodyStyle = singleBlogBodyStyle
@@ -127,13 +137,7 @@ class Post extends React.Component{
                 </div>
                 <div className="row post-user-buttons">
                     <div className="post-button-container">
-                        {this.props.buttons.map((button,index)=>{
-                                return(
-                                    <div key={index} className="post-link-container">
-                                        <a  className="post-link" href={button.url}>{` ${button.title}  `}<i className="fa fa-angle-right"></i></a>
-                                    </div>
-                                )
-                            })}
+                        {buttons}
                     </div>
                     <div style={postControlStyle}>
                         <i className="fa fa-link post-control-button" onClick={this.copyLink.bind(this)}></i>
