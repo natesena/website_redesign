@@ -180,9 +180,16 @@ class Upload extends React.Component{
     }
     addLinkButton(){
         // console.log('link button added')
-        this.setState({
-            buttons: [...this.state.buttons, {title: '', url: ''}]
-        })
+        if(this.state.buttons){
+            this.setState({
+                buttons: [...this.state.buttons, {title: '', url: ''}]
+            })
+        }
+        else{
+            this.setState({
+                buttons: [{title: '', url: ''}]
+            })
+        }
     }
     addAframePhoto(){
         this.setState({
@@ -283,6 +290,21 @@ class Upload extends React.Component{
         //if it is just an idea, we do not need a rich text editor
         //I would like the editor to begin with placeholder text
         let editor = null
+        let buttons = null 
+        if(this.state.buttons){
+            buttons = this.state.buttons.map((button, index)=>{
+                return(
+                    <div className="row post-button-inputs" key={index} >
+                        <div className="column-half ">
+                            <input className="zero-margin full-width" index={index} name={"title"} value={this.state.buttons[index].title} placeholder={"title"}onChange={(evt) => this.linkChange(evt, index)}></input>
+                        </div>
+                        <div className="column-half">
+                            <input className="zero-margin full-width" index={index} name={"url"} value={this.state.buttons[index].url} placeholder={"link url"}onChange={(evt) => this.linkChange(evt, index)}></input>
+                        </div>
+                    </div>
+                )
+            })
+        }
         if(this.state.type !== 'Ideas'){
             editor = <EditorComponent
                      onChange={this.onEditorStateChange.bind(this)} editorState={this.state.editorState}/>
@@ -321,18 +343,7 @@ class Upload extends React.Component{
                                         <option value="Ideas">Ideas</option>
                                     </select>
                                 </div>
-                                {this.state.buttons.map((button, index)=>{
-                                    return(
-                                        <div className="row post-button-inputs" key={index} >
-                                            <div className="column-half ">
-                                                <input className="zero-margin full-width" index={index} name={"title"} value={this.state.buttons[index].title} placeholder={"title"}onChange={(evt) => this.linkChange(evt, index)}></input>
-                                            </div>
-                                            <div className="column-half">
-                                                <input className="zero-margin full-width" index={index} name={"url"} value={this.state.buttons[index].url} placeholder={"link url"}onChange={(evt) => this.linkChange(evt, index)}></input>
-                                            </div>
-                                        </div>
-                                    )
-                                })}
+                                {buttons}
                                 <button className="upload-button" onClick={this.addLinkButton.bind(this)}>Add a Link To Post</button>
                                 
                             </div>
