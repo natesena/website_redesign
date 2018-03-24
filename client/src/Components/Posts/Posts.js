@@ -36,6 +36,7 @@ const manyTitleContainerStyle = {
     marginBottom: "10px"
 }
 
+//Posts Render Differently based on whether the user is viewing a single post or multiple posts
 class Post extends React.Component{
     state={
         home: false,
