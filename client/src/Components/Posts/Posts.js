@@ -77,6 +77,16 @@ class Post extends React.Component{
         // event.clipboardData.setData("text/plain", shareLink);
         console.log("i wish this copied")
     }
+    returnFeaturedImgURL(){
+        var featuredURL = null
+        // console.log("tried to update featured img")
+        for(let i=0; i < this.props.aframePhotoLinks; i++){
+            if(this.props.aframePhotoLinks[i].featured === "true"){
+                featuredURL = this.props.aframePhotoLinks[i].url
+            }
+        }
+        return featuredURL
+    }
     render(){
         let divClass = "full-page-post" //-------------
         let divStyle = null
@@ -124,6 +134,7 @@ class Post extends React.Component{
             titleContainerStyle = manyTitleContainerStyle
             divClass = "post"
             divStyle = containerStyle
+            divStyle.backgroundImage = `url(${this.returnFeaturedImgURL()})`
             titleStyle = <h2>{this.props.title}</h2>
         }
         if(this.state.redirect){//we will redirect when we have hit delete
