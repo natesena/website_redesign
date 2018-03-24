@@ -30,7 +30,7 @@ const manyBlogBodyStyle = {
 }
 
 const fullPageTitleContainerStyle = {
-    marginTop: "100px"
+    marginTop: "0"
 }
 const manyTitleContainerStyle = {
     marginBottom: "10px"

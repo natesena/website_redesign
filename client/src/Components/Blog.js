@@ -17,6 +17,12 @@ class Blog extends React.Component{
             this.setState({
                 id: id,
                 posts: [res.data.Post]
+            },()=>{
+                // console.log("should update every 3 secs")
+                this.interval = setInterval(()=>{
+                    // console.log("interval step")
+                    this.changeFeaturedImg()
+                }, 8000)
             })
         })
     }
@@ -27,6 +33,12 @@ class Blog extends React.Component{
             console.log("res: ", res)
             this.setState({
                 posts: [...res.data.Posts]
+            }, ()=>{
+                // console.log("should update every 3 secs")
+                this.interval = setInterval(()=>{
+                    // console.log("interval step")
+                    this.changeFeaturedImg()
+                }, 8000)
             })
         })
     }
@@ -40,6 +52,9 @@ class Blog extends React.Component{
         else{
             this.getAllBlogPosts()
         }
+    }
+    componentWillUnmount(){
+        clearInterval(this.interval)
     }
     changeFeaturedImg(){
         // console.log("tried to change featured img")
@@ -72,28 +87,37 @@ class Blog extends React.Component{
         return null
     }
     render(){
+        var imgSRC = this.returnFeaturedImgURL(this.state.currentFeaturedPostIndex)
+        var backgroundImgStyle = null
+        if(imgSRC){
+            backgroundImgStyle = {backgroundImage: `url(${imgSRC})`}
+        }
+
+
         let postFormat = "many"
         let bodyVisibility = false
         let descriptionVisiblity = true
         let controlsVisibility = false
-        let title = <div className="text-center">
-                        <h1 className="title">Blog</h1>
-                        <p>I want to do pagination on this page and should look up if there is a best practice</p>
+        let title =  <div style={backgroundImgStyle} className="text-center title-wrapper img-transition">
+                        <div>
+                            <h1 className="title">THIS IS THE BLOG</h1>
+                        </div>
                     </div>
         if(this.state.id){
             postFormat = "single"
             bodyVisibility = true
             descriptionVisiblity = false
             controlsVisibility = true
-            title = null
+            // title = null
         }
         return(
             //dependent on the format of the post make it look differently
             <div>
                 <NavBar />
+                
                 <div className="body-container-top">
-                    <div className="body-container-width">
-                        {title}
+                    {title} 
+                    <div className="body-container-width"> 
                         {this.state.posts.map((post)=>{
                             return <Post key={post._id} buttons={post.buttonLinks} format={postFormat} pageID={this.state.id} type={post.type} id={post._id} title={post.title} description={JSON.parse(post.description)} body={JSON.parse(post.body)} descriptionVisible={descriptionVisiblity} bodyVisible={bodyVisibility} controls={controlsVisibility}/>
                         })}

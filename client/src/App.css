@@ -208,9 +208,11 @@ p{
   top: 0;
   margin: 0;
   z-index: 2;
+  text-align: center;
   position: absolute;
   color: white;
   padding: 10px 0;
+  width: 100%;
   background: linear-gradient(to bottom,rgba(0,0,0,0.5),rgba(256, 256, 256, 0));
 }
 
@@ -261,7 +263,8 @@ p{
 /* if on mobile */
 @media (max-width: 600px){
   .NavBar{
-    padding: 10px 0
+    padding: 10px 0;
+    text-align: left
   }
   .NavBar .fa{
     vertical-align: top;
