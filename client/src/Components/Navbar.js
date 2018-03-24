@@ -8,10 +8,10 @@ const LinkStyle = {
     textDecoration: 'none',
     color: 'white',
 }
-let navStyle = {
-    backgroundColor: 'black',
-    width: window.innerWidth
-}
+// let navStyle = {
+//     backgroundColor: 'black',
+//     width: window.innerWidth
+// }
 
 class Navbar extends React.Component{
     componentDidMount(){
@@ -35,14 +35,14 @@ class Navbar extends React.Component{
     render(){
        
         // console.log('window href: ', window.location.href)
-        if(window.location.href === window.location.origin + '/'){
-            navStyle = {
-                background: "transparent",
-                // width: window.innerWidth
-            }
-        }
+        // if(window.location.href === window.location.origin + '/'){
+        //     navStyle = {
+        //         background: "transparent",
+        //         // width: window.innerWidth
+        //     }
+        // }
         return (
-            <div className='NavBar' style={navStyle}>
+            <div className='NavBar' >
                 <i className="toggle-nav fa fa-bars" onClick={this.dropDownMenu}></i>
                 <ul id="menu-list" className="NavList">
                     <li><Link to='/home' style={LinkStyle}>Home</Link></li>

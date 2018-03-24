@@ -6,7 +6,8 @@ import NavBar from './Navbar'
 class Blog extends React.Component{
     state={
         id: '',//only used if there is a single post
-        posts:[]
+        posts:[],
+        currentFeaturedPostIndex: 0
     }
     //getOneBlogPost hits a different route to only return one post
     getOneBlogPost(id){
@@ -40,6 +41,36 @@ class Blog extends React.Component{
             this.getAllBlogPosts()
         }
     }
+    changeFeaturedImg(){
+        // console.log("tried to change featured img")
+        var newIndex = 0
+        if(this.state.currentFeaturedPostIndex === this.state.posts.length - 1){
+            // console.log("should loop to first image")
+            this.setState({
+                currentFeaturedPostIndex: newIndex
+            })
+        }
+        else{
+            // console.log("changing to next img")
+            this.setState({
+                currentFeaturedPostIndex: this.state.currentFeaturedPostIndex + 1
+            })
+        }
+    }
+    returnFeaturedImgURL(index){
+        // console.log("tried to update featured img")
+        if(this.state.posts.length > 0){
+            for(let i = 0; i < this.state.posts[index].aframePhotoLinks.length; i++){
+                if(this.state.posts[index].aframePhotoLinks[i].featured === true){
+                    var featuredImgSRC = this.state.posts[index].aframePhotoLinks[i].url
+                    // console.log("featured img found: ", featuredImgSRC)
+                    return featuredImgSRC
+                }
+            }
+        }
+        // console.log("no featured image for the post was found")
+        return null
+    }
     render(){
         let postFormat = "many"
         let bodyVisibility = false
@@ -61,7 +92,7 @@ class Blog extends React.Component{
             <div>
                 <NavBar />
                 <div className="body-container-top">
-                    <div className="body-container">
+                    <div className="body-container-width">
                         {title}
                         {this.state.posts.map((post)=>{
                             return <Post key={post._id} buttons={post.buttonLinks} format={postFormat} pageID={this.state.id} type={post.type} id={post._id} title={post.title} description={JSON.parse(post.description)} body={JSON.parse(post.body)} descriptionVisible={descriptionVisiblity} bodyVisible={bodyVisibility} controls={controlsVisibility}/>

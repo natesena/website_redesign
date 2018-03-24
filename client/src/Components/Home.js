@@ -74,11 +74,12 @@ class Home extends React.Component{
             <div>
                 <Navbar/>
                 <div className="body-container-top">
-                        <div style={backgroundImgStyle} className="text-center title-wrapper img-transition">
+                    <div style={backgroundImgStyle} className="text-center title-wrapper img-transition">
+                        <div>
                             <h1 className="title">THIS IS THE HOME</h1>
                         </div>
+                    </div>
                     <div className="body-container-width">
-                       
                         {this.state.posts.map((post)=>{
                             return <Post key={post._id} onDelete={this.hideDeletedPost.bind(this)} home={true} format={"many"} type={post.type} id={post._id} title={post.title} buttons={post.buttonLinks} description={JSON.parse(post.description)} bodyVisible={false} descriptionVisible={true} controls={true}/>
                         })}

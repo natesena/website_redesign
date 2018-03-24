@@ -31,7 +31,7 @@ i{
 .body-container-top{
   position: relative;
   /* border: 1px solid red; */
-  top: 90px;
+  top: 0px;
   /* padding: 0 50px */
 }
 .body-container-width{
@@ -100,7 +100,8 @@ p{
 }
 .img-transition{
   height: 30%;
-  min-height:300px 
+  min-height:200px; 
+  padding-top: 100px
 }
 /* End General App CSS */
 /* ----------------------- 2D Post CSS ----------------------------*/
@@ -209,7 +210,8 @@ p{
   z-index: 2;
   position: absolute;
   color: white;
-  padding: 20px 0
+  padding: 10px 0;
+  background: linear-gradient(to bottom,rgba(0,0,0,0.5),rgba(256, 256, 256, 0));
 }
 
 .NavBar .fa{
