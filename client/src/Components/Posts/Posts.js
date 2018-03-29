@@ -5,6 +5,8 @@ import axios from 'axios'
 import 'font-awesome/css/font-awesome.min.css'
 import {Redirect} from 'react-router-dom'
 
+//Should Comment each of these and when they are used
+
 const containerStyle = {
     boxShadow: '3px 3px 3px 1px rgba(10, 10, 10, .2)',
     padding: '25px 25px 15px 25px'
