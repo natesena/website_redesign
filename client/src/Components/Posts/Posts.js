@@ -7,10 +7,10 @@ import {Redirect} from 'react-router-dom'
 
 //Should Comment each of these and when they are used
 
-const containerStyle = {
-    boxShadow: '3px 3px 3px 1px rgba(10, 10, 10, .2)',
-    padding: '25px 25px 15px 25px'
-}
+// const containerStyle = {
+//     boxShadow: '3px 3px 3px 1px rgba(10, 10, 10, .2)',
+//     padding: '25px 25px 15px 25px'
+// }
 
 const postControlStyle = {
     display: "inline-block",
@@ -82,8 +82,10 @@ class Post extends React.Component{
     returnFeaturedImgURL(){
         var featuredURL = null
         // console.log("tried to update featured img")
-        for(let i=0; i < this.props.aframePhotoLinks; i++){
-            if(this.props.aframePhotoLinks[i].featured === "true"){
+        for(let i=0; i < this.props.aframePhotoLinks.length; i++){
+            // console.log("post has photolinks")
+            if(this.props.aframePhotoLinks[i].featured === true){
+                // console.log("found background image for post")
                 featuredURL = this.props.aframePhotoLinks[i].url
             }
         }
@@ -91,7 +93,7 @@ class Post extends React.Component{
     }
     render(){
         let divClass = "full-page-post" //-------------
-        let divStyle = null
+        var divStyle = null
         let titleContainerStyle = fullPageTitleContainerStyle
         let titleStyle = <h1 className="full-page-post-title">{this.props.title}</h1>
         let controls = null
@@ -135,8 +137,11 @@ class Post extends React.Component{
             //have totally different appearance
             titleContainerStyle = manyTitleContainerStyle
             divClass = "post"
-            divStyle = containerStyle
-            divStyle.backgroundImage = `url(${this.returnFeaturedImgURL()})`
+            divStyle = {
+                boxShadow: '3px 3px 3px 1px rgba(10, 10, 10, .2)',
+                padding: '25px 25px 15px 25px',
+                backgroundImage: `url(${this.returnFeaturedImgURL()})`
+            }
             titleStyle = <h2>{this.props.title}</h2>
         }
         if(this.state.redirect){//we will redirect when we have hit delete
