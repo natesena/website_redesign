@@ -128,7 +128,7 @@ class Post extends React.Component{
                             </div>
                         </div>
         }
-        if(this.props.descriptionVisible){
+        if(this.props.descriptionVisible){//If post is full screen, do not showthe description
             blogDescription = <div>
                                 {ReactHtmlParser(draftToHtml(this.props.description))}
                             </div>
