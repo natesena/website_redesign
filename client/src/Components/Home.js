@@ -79,7 +79,7 @@ class Home extends React.Component{
                             <h1 className="title">THIS IS THE HOME</h1>
                         </div>
                     </div>
-                    <div className="body-container-width">
+                    <div>
                         {this.state.posts.map((post)=>{
                             // console.log(post)
                             return <Post key={post._id} onDelete={this.hideDeletedPost.bind(this)} home={true} format={"many"} type={post.type} id={post._id} title={post.title} buttons={post.buttonLinks} description={JSON.parse(post.description)} bodyVisible={false} descriptionVisible={true} controls={true} aframePhotoLinks={post.aframePhotoLinks}/>

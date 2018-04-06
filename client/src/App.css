@@ -60,7 +60,6 @@ i{
 }
 .title-wrapper{
   background-color: red;
-  margin-bottom: 50px 
 }
 .inline-block{
   display: inline-block
@@ -110,16 +109,14 @@ p{
 }
 .post{
   background-color: white;
-  border-radius: 10px;
-  margin: 30px 0;
   -webkit-transition-duration: 0.3s;
   transition-duration: 0.3s;
   -webkit-transition-property: transform;
   transition-property: transform;
 }
 .post:hover, .post:focus, .post:active {
-  -webkit-transform: translateX(8px);
-  transform: translateX(8px);
+  -webkit-transform: perspective(500px) translateZ(10px);
+  transform: perspective(500px) translateZ(10px);
 }
 .full-page-post-title{
   text-align: center;

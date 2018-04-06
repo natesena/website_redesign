@@ -325,7 +325,7 @@ class Upload extends React.Component{
                         </div>
                         <div>
                             <h3>Post Preview</h3>
-                            <Post format={"many"} title={this.state.title} buttons={this.state.buttons} description={convertToRaw(this.state.descriptionEditorState.getCurrentContent())} body={{}} descriptionVisible={true} bodyVisible={false} controls={false}/>
+                            <Post format={"many"} title={this.state.title} buttons={this.state.buttons} aframePhotoLinks={this.state.aframePhotoLinks} description={convertToRaw(this.state.descriptionEditorState.getCurrentContent())} body={{}} descriptionVisible={true} bodyVisible={false} controls={false}/>
                         </div>
                         <div style={postFormStyle}>
                             <div >
