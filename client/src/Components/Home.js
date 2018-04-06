@@ -67,7 +67,12 @@ class Home extends React.Component{
         var imgSRC = this.returnFeaturedImgURL(this.state.currentFeaturedPostIndex)
         var backgroundImgStyle = null
         if(imgSRC){
-            backgroundImgStyle = {backgroundImage: `url(${imgSRC})`}
+            backgroundImgStyle = {
+                backgroundImage: `url(${imgSRC})`,
+                backgroundSize:     'cover',
+                backgroundRepeat:   'no-repeat',
+                backgroundPosition: 'center center'  
+            }
         }
         // console.log("imgsrc: ", imgSRC)
         return(

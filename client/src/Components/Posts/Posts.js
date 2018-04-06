@@ -140,7 +140,10 @@ class Post extends React.Component{
             divStyle = {
                 boxShadow: '3px 3px 3px 1px rgba(10, 10, 10, .2)',
                 padding: '25px 25px 15px 25px',
-                backgroundImage: `url(${this.returnFeaturedImgURL()})`
+                backgroundImage: `url(${this.returnFeaturedImgURL()})`,
+                backgroundSize:     'cover',
+                backgroundRepeat:   'no-repeat',
+                backgroundPosition: 'center center'  
             }
             titleStyle = <h2>{this.props.title}</h2>
         }
