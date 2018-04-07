@@ -33,7 +33,6 @@ class Navbar extends React.Component{
         }
     }
     render(){
-       
         // console.log('window href: ', window.location.href)
         // if(window.location.href === window.location.origin + '/'){
         //     navStyle = {
@@ -46,6 +45,7 @@ class Navbar extends React.Component{
                 <i className="toggle-nav fa fa-bars" onClick={this.dropDownMenu}></i>
                 <ul id="menu-list" className="NavList">
                     <li><Link to='/home' style={LinkStyle}>Home</Link></li>
+                    <li><Link to='/About' style={LinkStyle}>About Me</Link></li>
                     <li><Link to='/WebDevelopment' style={LinkStyle}>Web Development</Link></li>
                     <li><Link to='/ProductDesign' style={LinkStyle}>Product Design</Link></li>
                     <li> <Link to='/Blog' style={LinkStyle}>Blog</Link></li>

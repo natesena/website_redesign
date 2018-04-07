@@ -3,11 +3,8 @@ import { Switch, Route } from 'react-router-dom'
 import './App.css';
 // import Navbar from './Components/Navbar.js'
 import Home from './Components/Home.js'
-import WebDevelopment from './Components/WebDevelopment.js'
-import ProductDesign from './Components/ProductDesign.js'
 import Upload from './Components/Upload.js'
 import Blog from './Components/Blog.js'
-import Ideas from './Components/Ideas.js'
 import Login from './Components/Login.js'
 import Welcome from './Components/Welcome.js'
 import AframeHome from './Components/Aframe/HomeScene.js'
@@ -47,13 +44,13 @@ class App extends Component {
               return <Login/>
             }} />
             <Route path="/WebDevelopment" render={(props)=>{
-              return <WebDevelopment  getId={this.getID}/>
+              return <Blog  getId={this.getID} postType={"WebDevelopment"}/>
             }} />
             <Route path="/Ideas" render={(props)=>{
-              return <Ideas getId={this.getID}/>
+              return <Blog getId={this.getID} postType={"Ideas"}/>
             }} />
             <Route path="/ProductDesign" render={(props)=>{
-              return <ProductDesign getId={this.getID}/>
+              return <Blog getId={this.getID} postType={"ProductDesign"}/>
             }} />
             <Route path="/UploadProject" render={(props)=>{
               return <Upload getId={this.getID}/>
@@ -62,7 +59,7 @@ class App extends Component {
               return <Upload getId={this.getID}/>
             }} />
             <Route path="/Blog" render={(props)=>{
-              return <Blog getId={this.getID}/>
+              return <Blog getId={this.getID} postType={"Blog"}/>
             }} />
           </Switch>
         </div>

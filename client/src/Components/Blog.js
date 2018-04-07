@@ -10,7 +10,7 @@ class Blog extends React.Component{
         currentFeaturedPostIndex: 0
     }
     //getOneBlogPost hits a different route to only return one post
-    getOneBlogPost(id){
+    getOnePost(id){
         axios.get('/api/Posts/' + id)
         .then((res)=>{
             console.log("res: ", res)
@@ -27,10 +27,10 @@ class Blog extends React.Component{
         })
     }
     //getAllPosts hits a route to deliver all posts
-    getAllBlogPosts(){
-        axios.get('/api/Posts/', {params:{type: "Blog"}})
+    getAllPosts(){
+        axios.get('/api/Posts/', {params:{type: this.props.postType}})
         .then((res)=>{
-            console.log("res: ", res)
+            // console.log("res: ", res)
             this.setState({
                 posts: [...res.data.Posts]
             }, ()=>{
@@ -47,10 +47,10 @@ class Blog extends React.Component{
         let id = this.props.getId()
         // console.log(id)
         if(id){
-            this.getOneBlogPost(id)
+            this.getOnePost(id)
         }
         else{
-            this.getAllBlogPosts()
+            this.getAllPosts()
         }
     }
     componentWillUnmount(){
@@ -119,7 +119,7 @@ class Blog extends React.Component{
                     {title} 
                     <div className="body-container-width"> 
                         {this.state.posts.map((post)=>{
-                            return <Post key={post._id} buttons={post.buttonLinks} aframePhotos={post.aframePhotoLinks} format={postFormat} pageID={this.state.id} type={post.type} id={post._id} title={post.title} description={JSON.parse(post.description)} body={JSON.parse(post.body)} descriptionVisible={descriptionVisiblity} bodyVisible={bodyVisibility} controls={controlsVisibility}/>
+                            return <Post key={post._id} buttons={post.buttonLinks} aframePhotoLinks={post.aframePhotoLinks} format={postFormat} pageID={this.state.id} type={post.type} id={post._id} title={post.title} description={JSON.parse(post.description)} body={JSON.parse(post.body)} descriptionVisible={descriptionVisiblity} bodyVisible={bodyVisibility} controls={controlsVisibility}/>
                         })}
                     </div>
                 </div>
